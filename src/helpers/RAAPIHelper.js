@@ -5,14 +5,16 @@ import pLimit from 'p-limit'
 const limit = pLimit(2);
 // auth for RA_API
 const authorization = buildAuthorization({
-    username: process.env.RA_API_USER,
-    webApiKey: process.env.RA_API_KEY,
+    username: process.env.RA_API_USER ?? "NO_USER_CONFIGURED",
+    webApiKey: process.env.RA_API_KEY ?? "NO_KEY_CONFIGURED",
 });
 
 const inFlight = new Map();
 
 /* Get game lists for multiple systemIds, using caching */
 const getGameLists = async (systemIds) => {
+    if (!process.env.RA_API_KEY || process.env.RA_API_USER) return undefined;
+
     if (!systemIds) return {}
     let gameLists = metadataCache.get(`gameLists`) ?? {};
     
@@ -23,7 +25,8 @@ const getGameLists = async (systemIds) => {
             const promise = limit(() => getGameList(authorization, {
                 consoleId: id,
                 shouldRetrieveGameHashes: true
-            })).then(result => {
+            }))
+            .then(result => {
                 gameLists[id] = result;
                 inFlight.delete(id);
                 return result;

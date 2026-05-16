@@ -1,3 +1,6 @@
+import squirrelStartup from 'electron-squirrel-startup';
+if (squirrelStartup) app.quit();
+
 import {app, BrowserWindow, ipcMain} from 'electron'
 import { fileURLToPath } from 'url';
 import path from 'node:path'
@@ -23,11 +26,12 @@ let win;
 const createWindow = () => {
     // TODO: Open to window size
     win = new BrowserWindow({
+        title: 'Prism',
         show: false,
         width: 1440,
         height: 850,
         frame:false,
-        icon: path.join(__dirname, 'resources', 'app-icon.ico'),
+        icon: path.join(__dirname, 'resources', 'prism-icon-64px.ico'),
         webPreferences: {
             contextIsolation: true,
             preload: path.join(__dirname, 'preload.js')
@@ -38,8 +42,8 @@ const createWindow = () => {
     else win.loadFile(path.join(__dirname, './renderer/dist/index.html'))
 }
 
-
 app.whenReady().then(() => {
+    app.setAppUserModelId('Prism');
     createWindow();
     const handleIpc = (channel, handler) => {
         ipcMain.handle(channel, async (event, ...args) => {

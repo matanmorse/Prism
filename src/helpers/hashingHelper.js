@@ -13,13 +13,17 @@ const searchForHashes = async (systemIds, romPath) => {
         getGameLists(systemIds),
         hashRom(romPath, systemIds),
     ]);
+
+    if(!gameLists || !hashes) return null;
+
     // search for matches
     for (const id of systemIds) {
         const hash = hashes[id];
         if (!hash) continue;
 
         const gameList = gameLists[systemIds.indexOf(id)];
-        const game = gameList?.find(x => x.hashes.includes(hash));
+        console.log(gameList);
+        const game = gameList && gameList.find(x => x.hashes.includes(hash));
         if (!game) continue;
         console.log(`[Hashing Helper] Found hash match for game ${romPath}: ${game.title}`);
         return {
