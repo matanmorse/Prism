@@ -16,8 +16,8 @@ const EmulatorsSettings = ({submenu, resetEmulator, setEmulator, selectedEmulato
                 .map((emulator, key) => {return (
                 <div key={key}
                 className={"emulator-select-wrapper "
-                + (submenu === emulator.prettyName ?
-                "emulator-select-selected" : "emulator-select-hover")}
+                + (selectedEmulator === emulator.prettyName ?
+                "emulator-select-selected" : "")}
                 onClick={() => setSelectedEmulator(emulator.name)}
                 >
                     <EmulatorNameAndIcon

@@ -129,7 +129,7 @@
 .sidebar-title {
   font-size: 14px;
   margin-top: 0px;
-  margin-bottom: .5rem;
+  margin: .5rem;
   color: var(--clr-text-tertiary);
   font-weight: normal;
 }
@@ -148,6 +148,7 @@
   flex-direction: column;
   border-right: 1px solid var(--clr-border);
   width: fit-content;
+  min-width: 175px;
 }
 
 .emulators-settings {
@@ -168,9 +169,21 @@
 }
 
 .option-icon-group {
+  padding:  10px 15px 10px 15px;
   display: flex;
   gap: 8px;
   align-items: center;
+  border-top: 1px solid transparent;
+  border-bottom: 1px solid transparent;
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  &.selected {
+    background-color: var(--clr-surface-active);
+    border-color: var(--clr-surface-3);
+  }
 }
 
 .custom-file-input::before {
@@ -212,6 +225,11 @@
   padding: 10px 15px 10px 15px;
 }
 
+.settings-form > .label-wrapper {
+  background-color: var(--clr-surface-3);
+  border-radius: 5px;
+  width: fit-content;
+}
 .auto-install-buttons-wrapper {
   display: flex;
   gap: 1rem;
@@ -250,11 +268,9 @@
 }
 
 .emulator-settings-sidebar {
-  padding: 1.5rem;
-  padding-top: .5rem;
   border-right: 1px solid var(--clr-border);
   background-color: var(--clr-surface-2);
-
+  min-width: 175px;
 }
 
 .rom-settings {
@@ -266,4 +282,20 @@
   position:unset;
   margin-top: 3px;
   color: var(--clr-text-secondary)
+}
+
+
+.emulator-select-wrapper {
+  box-sizing: content-box;
+  border-top: 1px solid transparent;
+  border-bottom: 1px solid transparent;
+}
+.emulator-select-wrapper:hover {
+  cursor: pointer;
+  background-color: var(--clr-surface-active);
+}
+
+.emulator-select-selected {
+  background-color: var(--clr-surface-active);
+  border-color: var(--clr-surface-active);
 }

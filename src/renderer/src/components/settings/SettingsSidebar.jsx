@@ -8,11 +8,11 @@ const SettingsSidebar = ({isLoading, submenu, setSubmenu}) => {
     return (
         <div className="emulator-settings-sidebar">
                 <h6 className="sidebar-title">Settings</h6>
-                <div className="option-icon-group" onClick={() => setSubmenu('emulators')}>
+                <div className={`option-icon-group ${submenu === 'emulators' && "selected"}`} onClick={() => setSubmenu('emulators')}>
                     <i className="bi bi-controller"></i>
                     <h3 className="settings-sidebar-option">Emulators</h3>
                 </div>
-                <div className="option-icon-group" onClick={() => setSubmenu('roms')}>
+                <div className={`option-icon-group ${submenu === 'roms' && "selected"}`} onClick={() => setSubmenu('roms')}>
                     <i className="bi bi-joystick"></i>
                     <h3 className="settings-sidebar-option">Rom Folder</h3>
                 </div>
