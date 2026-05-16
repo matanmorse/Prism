@@ -47,6 +47,8 @@ const sortByLexicalSimilarity = (title, results) => {
 }
 
 const getIGBBMetadata = async (title) => {
+    if (!process.env.IGDB_CLIENT_ID || !process.env.IGDB_CLIENT_SECRET) return undefined;
+    
     console.log(`[IGDB Metadata] Getting IGDB entry for name ${title}`);
     const response = await apicalypse(IGDBQueryData)
         .fields('name, summary, first_release_date, total_rating_count')

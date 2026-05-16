@@ -2,15 +2,18 @@ import SGDB from "steamgriddb";
 import dotenv from 'dotenv';
 
 dotenv.config({quiet: true})
-const SGBDClient = new SGDB(process.env.STEAMGRIDDB_API_KEY)
+const SGBDClient = new SGDB(process.env.STEAMGRIDDB_API_KEY ?? "NO_SGDB_KEY_CONFIGURED")
 
 /* use steamgriddb to search for the title, then get the cover art for it */
 const getCoverArtFromName = async (title) => {
+    if (!process.env.STEAMGRIDDB_API_KEY) return null;
     const games = await SGBDClient.searchGame(title);
+
     if (games.length === 0 || games[0] === undefined) return {}
     // pick first result-- most accurate
     const game = games[0];
     const grids = await SGBDClient.getGridsById(game.id, undefined, undefined, undefined, undefined, 'false', 'false')
+
     if (grids.length === 0) return {}
     return grids[0].url;
 }

@@ -1,7 +1,10 @@
 {
-  "name": "steamulator",
+  "name": "prism",
   "version": "1.0.0",
   "main": "src/main.js",
+  "authors": "Matan Morse",
+  "description": "A launcher for video game emulators.",
+  "productName": "prism",
   "type": "module",
   "dependencies": {
     "@retroachievements/api": "^2.10.0",
@@ -10,8 +13,6 @@
     "apicalypse": "^1.0.5",
     "cross-env": "^10.1.0",
     "dotenv": "^17.4.2",
-    "electron": "^41.3.0",
-    "electron-forge": "^5.2.4",
     "electron-squirrel-startup": "^1.0.1",
     "electron-store": "^11.0.2",
     "glob": "^13.0.6",
@@ -21,11 +22,33 @@
     "steamgriddb": "^2.2.1"
   },
   "scripts": {
-    "start": "cross-env NODE_ENV=development nodemon --watch src --ext js --exec electron ."
+    "start": "electron-forge start",
+    "package": "electron-forge package",
+    "make": "electron-forge make"
   },
   "devDependencies": {
     "@electron-forge/cli": "^7.11.1",
+    "@electron-forge/maker-deb": "^7.11.1",
+    "@electron-forge/maker-rpm": "^7.11.1",
+    "@electron-forge/maker-squirrel": "^7.11.1",
+    "@electron-forge/maker-zip": "^7.11.1",
+    "@electron-forge/plugin-auto-unpack-natives": "^7.11.1",
+    "@electron-forge/plugin-fuses": "^7.11.1",
+    "@electron/fuses": "^1.8.0",
+    "electron": "^41.6.1",
     "electron-reload": "^2.0.0-alpha.1",
-    "nodemon": "^3.1.14"
+    "nodemon": "^3.1.14",
+    "rcedit": "^5.0.2"
+  },
+  "config": {
+    "forge": {
+      "packagerConfig": {},
+      "makers": [
+        {
+          "name": "@electron-forge/maker-squirrel",
+          "config": {}
+        }
+      ]
+    }
   }
 }
