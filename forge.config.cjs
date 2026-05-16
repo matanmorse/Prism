@@ -4,13 +4,22 @@ const { FuseV1Options, FuseVersion } = require('@electron/fuses');
 module.exports = {
   packagerConfig: {
     asar: true,
+    name: "prism",
+    executableName: "prism",
+    icon: './src/resources/prism-icon-64px.ico'
   },
   rebuildConfig: {},
   makers: [
     {
       name: '@electron-forge/maker-squirrel',
       config: {
-      }
+        name: 'prism',
+        setupExe: "PrismSetup.exe",
+        setupIcon: './src/resources/prism-icon-64px.ico',
+        loadingGif: './src/resources/installer-gif.gif',
+        shortcutLocations: ['Desktop', 'StartMenu']
+      },
+      platforms: ['win32']
     },
     {
       name: '@electron-forge/maker-zip',
