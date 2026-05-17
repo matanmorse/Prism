@@ -4,7 +4,7 @@ if (squirrelStartup) app.quit();
 import {app, BrowserWindow, ipcMain} from 'electron'
 import { fileURLToPath } from 'url';
 import path from 'node:path'
-import { selectExe, selectRomFolder, getGames } from './services/fileService.js';
+import { selectExe, selectRomFolder, getGames, removeGame } from './services/fileService.js';
 import { doEmulatorAutoScan, doRomAutoScan } from './services/scanService.js';
 import { launchGame } from './services/launchGameService.js';
 import { getEmulatorsConfig, getSupportedEmulators, hasSettings, isDev, resetRomFolderPath, resetSettings } from './services/configService.js'
@@ -72,6 +72,7 @@ app.whenReady().then(() => {
     handleIpc('clear-roms', () => clearRoms())
     handleIpc('do-rom-auto-scan', () => doRomAutoScan())
     handleIpc('do-emulator-auto-scan', (e, emulatorName) => doEmulatorAutoScan(emulatorName))
+    handleIpc('remove-game', (e, toDeletePath) => removeGame(toDeletePath))
 
     handleIpc('window-minimize', () => win.minimize());
     handleIpc('window-maximize', () => {

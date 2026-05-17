@@ -13,6 +13,7 @@ const romStore = new ElectronStore()
 const getGames = async () => {
     // Get roms from store
     var roms = romStore.get('roms', []);    
+    console.log(romStore.path);
     // add metadata
     roms = await Promise.all(roms.map(async (rom) => {
         const metadata = await withCache(metadataCache, 'metadata', rom, () => getMetadata(rom))
@@ -22,6 +23,18 @@ const getGames = async () => {
         }
     }))
     return roms;
+}
+
+/* Remove a game from the library by deleting its entry in the store */
+const removeGame = async (toDeletePath) => {
+    const normalized = path.normalize(toDeletePath)
+    console.log('[File Service] Removing ' + normalized)
+
+    var roms = romStore.get('roms', [])
+    if (!roms.includes(normalized)) return;
+
+    roms = roms.filter(r => r && path.normalize(r) !== normalized);
+    romStore.set('roms', roms);
 }
 
 /* Opens dialog to select ROM folder */
@@ -51,5 +64,6 @@ export {
     selectExe,
     selectRomFolder,
     getGames,
+    removeGame,
     romStore
 }

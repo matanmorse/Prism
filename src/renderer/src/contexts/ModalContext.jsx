@@ -1,29 +1,31 @@
-import { createContext, useEffect } from 'react';
+import { createContext, useContext, useEffect, useState } from 'react';
 import '../styles/Modal.css'
-import { useContext } from 'react';
-import { useState } from 'react';
+
 const ModalContext = createContext(null);
 
 export function ModalProvider({ children }) {
-    const [modal, setModal] = useState(null);
+    const [modalStack, setModalStack] = useState([]);
 
-    const showModal = (component) => setModal(component);
-    const hideModal = () => setModal(null);
+    const showModal = (component) => setModalStack(prev => [...prev, component]);
+    const hideModal = () => setModalStack(prev => prev.slice(0, -1));
+    const hideAll = () => setModalStack([]);
 
-    // Close modals with escape key
-    const handleKeyDown = (e) => { if (e.key === 'Escape' && modal !== null) hideModal();}
-    document.addEventListener('keydown', handleKeyDown);
+    useEffect(() => {
+        const handleKeyDown = (e) => { if (e.key === 'Escape') hideModal(); }
+        document.addEventListener('keydown', handleKeyDown);
+        return () => document.removeEventListener('keydown', handleKeyDown);
+    }, []);
 
     return (
-        <ModalContext.Provider value={{ showModal, hideModal }}>
+        <ModalContext.Provider value={{ showModal, hideModal, hideAll }}>
             {children}
-            {modal && (
-                <div className="modal-overlay" onClick={hideModal}>
+            {modalStack.map((modal, i) => (
+                <div key={i} className="modal-overlay" style={{ zIndex: 1000 + i }} onClick={hideModal}>
                     <div className="modal-content" onClick={e => e.stopPropagation()}>
                         {modal}
                     </div>
                 </div>
-            )}
+            ))}
         </ModalContext.Provider>
     );
 }

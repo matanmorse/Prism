@@ -44,6 +44,11 @@ body {
   height: calc(100vh - 30px);
 }
 
+h1, h2, h3, h4, h5, h6 {
+  margin-top: .25rem;
+  margin-bottom: .2rem;
+}
+
 a {
   font-weight: 500;
   color: #646cff;
@@ -142,6 +147,20 @@ a:hover {
   transition: --progress 0.3s ease, background 0.3s ease;
 }
 
+/* Installing - progress bar via background */
+.btn-deleting, .btn-deleting:hover {
+  background: linear-gradient(
+    to right,
+    rgb(248, 113, 113, 0.9) var(--progress, 0%),
+    rgba(254, 59, 59, 0.4) var(--progress, 0%)
+  );
+  border-color: var(--clr-primary-border);
+  color: var(--clr-primary-1);
+  cursor: not-allowed;
+  pointer-events: none;
+  transition: --progress 0.3s ease, background 0.3s ease;
+}
+
 /* Installed - success state */
 .btn-installed {
   background: rgba(74, 222, 128, 0.1);
@@ -194,6 +213,18 @@ button:focus-visible {
   margin-bottom: .5rem;
 }
 
+.text-footnote {
+  color: var(--clr-text-tertiary);
+}
+
+.text-xsm {
+  font-size: 10px;
+}
+
+.text-sm {
+  font-size: 12px;
+}
+
 .table {
   width: 100%;
   border-collapse: collapse;
@@ -201,11 +232,15 @@ button:focus-visible {
   color: var(--clr-text-primary);
   background: var(--clr-surface-1);
   border: 1px solid var(--clr-border);
-  margin: 1rem 0rem 1rem 0rem;
+  margin-bottom: 1rem;
 }
 
 .table thead tr {
-  border-bottom: 1px solid var(--clr-border);
+  border: 1px solid var(--clr-border) ;
+  position: sticky;
+  background-color:rgb(30,30,45) !important;
+  top: 0;
+  z-index: 10000;
 }
 
 .table thead td,
@@ -271,8 +306,101 @@ button:focus-visible {
   color: var(--clr-primary-1);
 }
 
+tbody tr:has(input:checked) {
+  background: var(--clr-primary-active) !important;
+}
+
+
+tbody tr:has(input:checked) td {
+  color: var(--clr-primary-1);
+}
+
+input[type="checkbox"] {
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  border-radius: 4px;
+  border: 1px solid var(--clr-border);
+  background: var(--clr-surface-2);
+  cursor: pointer;
+  transition: all 0.15s ease;
+  position: relative;
+  flex-shrink: 0;
+}
+
+input[type="checkbox"]:hover {
+  border-color: var(--clr-primary-border);
+  background: var(--clr-surface-3);
+}
+
+input[type="checkbox"]:checked {
+  background: rgba(139, 92, 246, 0.25);
+  border-color: rgba(192, 92, 246, 0.6);
+}
+
+input[type="checkbox"]:checked::after {
+  content: '';
+  position: absolute;
+  left: 4px;
+  top: 1.5px;
+  width: 5px;
+  height: 9px;
+  border: 1.5px solid var(--clr-primary-1);
+  border-top: none;
+  border-left: none;
+  transform: rotate(45deg);
+}
+
+input[type="checkbox"]:indeterminate {
+  background: rgba(139, 92, 246, 0.25);
+  border-color: rgba(192, 92, 246, 0.6);
+}
+
+input[type="checkbox"]:indeterminate::after {
+  content: '';
+  position: absolute;
+  left: 3px;
+  top: 6.5px;
+  width: 8px;
+  height: 1.5px;
+  background: var(--clr-primary-1);
+  border-radius: 2px;
+}
+
+input[type="checkbox"]:disabled { 
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.button-group {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(192, 92, 246, 0.3);
+}
+
+::-webkit-scrollbar-thumb:active {
+  background: rgba(192, 92, 246, 0.2);
+}
+
+
 * {
-  --clr-surface-0: rgb(20, 20, 30);
+  --clr-surface-0: rgb(25, 25, 40);
   --clr-surface-1: rgba(255, 255, 255, 0.025);
   --clr-surface-2: rgba(255, 255, 255, 0.05);
   --clr-surface-3: rgba(255, 255, 255, 0.075);

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import useProgress from "../../../hooks/useProgress";
 import { useLibrary } from "../../../contexts/LibraryContext";
+import GamesTable from "./GamesTable";
 
 const ROMSettingsWindow = () => {
     const {games, fetchGames} = useLibrary();
@@ -14,7 +15,6 @@ const ROMSettingsWindow = () => {
         setIsScanning(false);
         fetchGames();
     }
-
     return (
         <div className="rom-settings">
             <label>Select folders containing ROMs yourself, or use the auto scan feature:</label>
@@ -26,24 +26,7 @@ const ROMSettingsWindow = () => {
                 >Auto Scan</button>
                 <button className="btn btn-ghost btn-lg">Select folder manually</button>
             </div>
-            <table className="table table-striped table-outlind">
-                <caption style={{textAlign: 'left'}}>Loaded Games ({games.length})</caption>
-                <thead>
-                    <tr>
-                        <td>Name</td>
-                        <td>Released</td>
-                    </tr>
-                </thead>
-                <tbody>
-                    {games.map((g, key) => {
-                        return (
-                        <tr key={key}>
-                            <td>"{g.title}"</td>
-                            <td style={{textAlign: 'right'}}>{new Date(g.first_release_date * 1000).toLocaleDateString()}</td>
-                        </tr>)
-                    })}
-                </tbody>
-            </table>
+            <GamesTable />
         <div/>
         </div>
     )

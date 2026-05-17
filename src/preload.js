@@ -19,7 +19,8 @@ contextBridge.exposeInMainWorld('fileService', {
   readFiles: () => invoke('readFiles'),
   selectExe: async (emulatorName) => await invoke('select-exe', emulatorName),
   selectRomFolder: async () => invoke('select-rom-folder'),
-  getGames: async () => await invoke('get-games')
+  getGames: async () => await invoke('get-games'),
+  removeGame: (toDeletePath) => invoke('remove-game', toDeletePath)
 })
 
 contextBridge.exposeInMainWorld('configService', {
