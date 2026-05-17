@@ -8,8 +8,8 @@ import LibraryTopbar from '../components/library/LibraryTopbar'
 import { useLibrary } from '../contexts/LibraryContext'
 
 function App() {
-  const [games, setGames] = useState([])
-  const { libraryFilter, setLibraryFilter } = useLibrary();
+  const { games, setGames } = useLibrary();
+
   useEffect(() => {
       fetchGames();
     }, []
@@ -24,10 +24,7 @@ function App() {
   return (
     <>
       <div className="library">
-        <LibraryTopbar 
-          setLibraryFilter={setLibraryFilter}
-          libraryFilter={libraryFilter}
-        />
+        <LibraryTopbar />
         <div className="game-card-grid">
           {games.map((game, index) => (
             <GameCard key={index} game={game}/>
