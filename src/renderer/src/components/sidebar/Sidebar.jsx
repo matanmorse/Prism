@@ -6,20 +6,17 @@ import { useNavigate } from "react-router-dom";
 import { useModal } from "../../contexts/ModalContext";
 import DebugModal from "../../modals/DebugModal";
 import Settings from "../../pages/Settings";
+import { useLibrary } from "../../contexts/LibraryContext";
 
 const Sidebar = () => {
     const [selectedOption, setSelectedOption] = useState('all_games')
-    const [systemFilters, setSystemFilters] = useState([])
     const {showModal} = useModal();
-
+    const { systemFilters, setSystemFilters } = useLibrary();
     const addSystemFilter = (system) => setSystemFilters([...new Set([...systemFilters, system])])
     const removeSystemFilter = (system) => {
         if (!systemFilters.includes(system)) return;
         setSystemFilters(systemFilters.filter(x => x !== system))
     }
-
-    useEffect(() => console.log(systemFilters), [systemFilters])
-
     return (
          <div className="sidebar">
             <div className="logo-box">

@@ -6,7 +6,7 @@ import EditSettingsWindow from "./EditSettingsWindow";
 const EmulatorsSettings = ({submenu, resetEmulator, setEmulator, selectedEmulatorExePath}) => {
     const {emulators} = useEmulator();
     const [selectedEmulator, setSelectedEmulator] = useState('Ares');
-
+    
     return (
         <div className="emulators-settings">
             <div className="emulators-list">

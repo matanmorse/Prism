@@ -6,6 +6,7 @@ import { useEffect } from 'react'
 import EmulatorIconList from './library/EmulatorIconList'
 import { useModal } from '../contexts/ModalContext'
 import NoEmulatorModal from '../modals/NoEmulatorModal'
+import { useLibrary } from '../contexts/LibraryContext'
 
 const GameCard = ({game}) => {
     const [isLoading, setIsLoading] = useState(false)
@@ -13,6 +14,7 @@ const GameCard = ({game}) => {
     const [supportedEmulators, setSupportedEmulators] = useState([]);
     const [hasConfiguredEmulator, setHasConfiguredEmulator] = useState(true); /* has an exe been properly configured for an emulator that supports this? */
     const { showModal, hideModal } = useModal();
+    const { libraryFilter } = useLibrary();
 
     const launchGame = async () => {
         if (!hasConfiguredEmulator) {    
@@ -46,7 +48,11 @@ const GameCard = ({game}) => {
         });
     }, [supportedEmulators])
     
-    if (!game) return; // don't render until game has finished fetching
+    if (!game 
+        || (libraryFilter === 'needs_config' && hasConfiguredEmulator) 
+        || (libraryFilter === 'playable' && !hasConfiguredEmulator)
+    )
+        return; // don't render until game has finished fetching or if it is filtered out
     else return (
     <>
         <div className="game-card-wrapper">

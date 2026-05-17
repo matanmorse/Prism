@@ -21,8 +21,6 @@ const raHasherPath = !app.isPackaged
   ? path.join(import.meta.dirname, '..', 'resources', 'RAHasher.exe')
   : path.join(process.resourcesPath, 'RAHasher.exe');
 
-console.log(sevenZipPath, raHasherPath)
-
 const getEmulatorPath = (name) => settingsStore.get(`${name}-exe-path`)
 const getRomFolderPath = () => settingsStore.get('romfolder-path')
 

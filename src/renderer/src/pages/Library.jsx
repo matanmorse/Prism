@@ -5,11 +5,11 @@ import {Library as LibraryIcon} from 'lucide-react'
 import '../styles/Library.css'
 import GameCard from '../components/GameCard'
 import LibraryTopbar from '../components/library/LibraryTopbar'
+import { useLibrary } from '../contexts/LibraryContext'
 
 function App() {
   const [games, setGames] = useState([])
-  const [libraryFilter, setLibraryFilter] = useState('all')
-
+  const { libraryFilter, setLibraryFilter } = useLibrary();
   useEffect(() => {
       fetchGames();
     }, []

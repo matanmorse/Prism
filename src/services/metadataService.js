@@ -66,19 +66,23 @@ const fileEndingsToSystemID = {
     "ecm": [12],
     "mds": [12],
     "mdf": [12],
+    "cue": [12]
 }
 
 const metadataClient = axios.create({
-    baseURL: process.env.METADATA_SERVER_URL ?? 'http://localhost:8080',
+    baseURL: process.env.METADATA_SERVER_URL ?? 'https://prism.matanmorse.dev',
     headers: {'Content-Type': 'application/json'}
 })
 
 const metadataCache = new ElectronStore();
 
 const getMetadata = async (path) => {
+    console.log(path)
     const systemIds = fileEndingsToSystemID[path.split('.').at(-1)];
     const filename = path.split('\\').at(-1);
-
+    console.log('ending: ')
+    console.log(path.split('.').at(-1))
+    console.log(systemIds)
     // console.log(`System ids for ${filename} and ending ${path.split('.').at(-1)}`, systemIds)
     // Try to find canonical game title by its ROM, if no match found, sanitize ROM filename and use that as the title
     var game = await searchForHashes(systemIds, path)

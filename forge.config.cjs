@@ -5,7 +5,7 @@ const path = require('path');
 module.exports = {
   packagerConfig: {
     asar: true,
-    name: "prism",
+    name: "Prism",
     executableName: "Prism",
     icon: path.resolve(__dirname, 'src/resources/prism-icon-64px.ico'),
     extraResource: [
