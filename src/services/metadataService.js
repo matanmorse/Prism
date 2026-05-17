@@ -1,10 +1,8 @@
 import ElectronStore from "electron-store";
 import { fileURLToPath } from "node:url";
 import { clearCache } from "../caching.js";
-import {sanitizeRomName} from "../helpers/metadataHelper.js";
-import getIGBBMetadata from "../helpers/IGDBHelper.js";
+import {sanitizeRomName, getCoverArtFromName, getIGBBMetadata} from "../helpers/metadataHelper.js";
 import { hashRom, searchForHashes } from "../helpers/hashingHelper.js";
-import getCoverArtFromName from "../helpers/SGDBHelper.js";
 import axios from 'axios';
 
 const systemNames2SystemID = {
@@ -96,5 +94,7 @@ const getMetadata = async (path) => {
         coverArt: await getCoverArtFromName(game.title)
     }
 }
+
+
 
 export {getMetadata, metadataCache, metadataClient}

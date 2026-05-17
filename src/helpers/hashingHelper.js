@@ -2,7 +2,7 @@ import {spawn} from 'node:child_process'
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { raHasherPath } from '../services/configService.js';
-import getGameLists from './RAAPIHelper.js';
+import {getGameLists} from './metadataHelper.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
