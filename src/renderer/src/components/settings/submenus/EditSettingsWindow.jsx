@@ -1,25 +1,40 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useEmulator } from "../../../contexts/SharedContext";
 import EmulatorNameAndIcon from "../../EmulatorNameAndIcon"
 import ROMSettingsWindow from "./ROMSettingsWindow";
+import useProgress from "../../../hooks/useProgress";
+import { useLibrary } from "../../../contexts/LibraryContext";
 
 const EditSettingsWindow = ({selectedEmulator, ResetEmulator, SetEmulator, SelectedEmulatorExePath, setUserConfigureManually}) => {
     const {emulators} = useEmulator();
     const [isInstalling, setIsInstalling] = useState(false);
+    const [isScanning, setIsScanning] = useState(false);
     const {refetchEmulators} = useEmulator();
+    const autoInstallProgress = useProgress(5000, isInstalling);
+    const autoScanProgress = useProgress(3000, isScanning)
+    const {hasConfigToggle, setHasConfigToggle} = useLibrary();
 
     const DoAutoInstallation = async (e) => {    
-        e.preventDefault();
         setIsInstalling(true);
+        e.preventDefault(); e.currentTarget.blur(); // to force style updates
         await window.autoInstallService.autoInstallAndConfigure(selectedEmulator)
         await refetchEmulators();
+        setHasConfigToggle(!hasConfigToggle)
         setIsInstalling(false);
     }
 
     const DoAutoScan = async (e) => {
-        e.preventDefault();
+        setIsScanning(true);
+        e.preventDefault(); e.currentTarget.blur()
         await window.scanService.doEmulatorAutoScan(selectedEmulator)
         await refetchEmulators()
+        setHasConfigToggle(!hasConfigToggle)
+        setIsScanning(false);
+    }
+
+    const DoManualSelect = async (e) => {
+        await SetEmulator(e, selectedEmulator)
+        setHasConfigToggle(!hasConfigToggle);
     }
 
     return (
@@ -34,10 +49,10 @@ const EditSettingsWindow = ({selectedEmulator, ResetEmulator, SetEmulator, Selec
                         placeholder={ SelectedEmulatorExePath(selectedEmulator) ?? "Click browse to manually configure path for " + selectedEmulator }
                         >
                         </input>
-                        <i className="reset-emulator bi bi-x-lg" onClick={(e) => ResetEmulator(e, selectedEmulator)}></i>
+                        <i className="reset-emulator bi bi-x-lg" onClick={(e) => {setHasConfigToggle(!hasConfigToggle); ResetEmulator(e, selectedEmulator)}}></i>
                     </div>
                 </div>
-                <button className="exe-input-button btn btn-primary" onClick={(e) => SetEmulator(e, selectedEmulator) }><i className="bi bi-folder" style={{fontSize: '16pt'}}></i> Browse</button>
+                <button className="exe-input-button btn btn-primary" onClick={(e) => {setHasConfigToggle(!hasConfigToggle); (e, selectedEmulator)}}><i className="bi bi-folder" style={{fontSize: '16pt'}}></i> Browse</button>
             </div>
 
             {SelectedEmulatorExePath(selectedEmulator) !== undefined ?
@@ -46,15 +61,26 @@ const EditSettingsWindow = ({selectedEmulator, ResetEmulator, SetEmulator, Selec
             <p className="text-highlight">{selectedEmulator} has not been configured yet. See below for configuration options: </p>
             <div className="buttons">
                 <div className="button-label">
-                    <button className="btn btn-primary btn-lg" onClick={(e) => {e.preventDefault(); DoAutoInstallation(e)}}>Auto Install</button>
-                    <p className="text-info">Automatically install {selectedEmulator} from the internet</p>
+
+                    <button 
+                    className={`btn btn-primary btn-lg ${isInstalling && 'btn-installing btn-disabled'}`}
+                    style={{'--progress': `${autoInstallProgress}%`}}
+                    disabled={isScanning}
+                    onClick={(e) => {DoAutoInstallation(e)}}>Auto Install</button>
+                    <p className="text-info">{!isInstalling ? `Automatically install ${selectedEmulator} from the internet` : "Installing..."}</p>
                 </div>
                 <div className="button-label">
-                    <button className="btn btn-primary btn-lg" onClick={DoAutoScan}>Scan for existing</button>
-                    <p className="text-info">Check for an existing {selectedEmulator} executable on your system</p>
+                    <button 
+                    className={`btn btn-primary btn-lg ${isScanning && 'btn-installing btn-disabled'}`}
+                    style={{'--progress': `${autoScanProgress}%`}}
+                    disabled={isInstalling}
+                    onClick={(e) => {DoAutoScan(e)}}>Scan for existing</button>
+                    <p className="text-info">{isScanning ? "Scanning..." : `Check for an existing ${selectedEmulator} executable on your system`}</p>
                 </div>               
                 <div className="button-label">
-                    <button className="btn btn-primary btn-lg" onClick={(e) => SetEmulator(e, selectedEmulator) }>Select .exe manually</button>
+                    <button className="btn btn-primary btn-lg" 
+                    onClick={(e) => {DoManualSelect(e)}}
+                    disabled={isInstalling || isScanning}>Select .exe manually</button>
                     <p className="text-info">Browse your filesystem and select the {selectedEmulator} executable file</p>
                 </div>
             </div>

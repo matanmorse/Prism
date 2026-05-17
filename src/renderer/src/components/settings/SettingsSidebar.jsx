@@ -14,7 +14,7 @@ const SettingsSidebar = ({isLoading, submenu, setSubmenu}) => {
                 </div>
                 <div className={`option-icon-group ${submenu === 'roms' && "selected"}`} onClick={() => setSubmenu('roms')}>
                     <i className="bi bi-joystick"></i>
-                    <h3 className="settings-sidebar-option">Rom Folder</h3>
+                    <h3 className="settings-sidebar-option">Games</h3>
                 </div>
             </div>
     )

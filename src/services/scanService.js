@@ -27,6 +27,7 @@ const doRomAutoScan = async() => {
     await Promise.all(merged.map(async (x) => {
         await withCache(metadataCache, 'metadata', x, () => getMetadata(x))
     }));
+    return merged;
 }
 
 /* Returns all valid roms within the folder and its subfolders */

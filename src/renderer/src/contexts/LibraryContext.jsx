@@ -7,9 +7,23 @@ export function LibraryProvider({ children }) {
     const [libraryFilter, setLibraryFilter] = useState('all')
     const [systemFilters, setSystemFilters] = useState([])
     const [games, setGames] = useState([])
+    const [hasConfigToggle, setHasConfigToggle] = useState(false);
+
+    /* Get games via IPC */
+    const fetchGames = async () => {
+        const res = await window.fileService.getGames();
+        console.log(res)
+        setGames(res)
+    }
 
     return (
-        <LibraryContext.Provider value={{libraryFilter, setLibraryFilter, systemFilters, setSystemFilters, games, setGames, titleSearch, setTitleSearch}}>
+        <LibraryContext.Provider value={{libraryFilter, setLibraryFilter, 
+        systemFilters, setSystemFilters, 
+        games, 
+        titleSearch, setTitleSearch, 
+        fetchGames,
+        hasConfigToggle, setHasConfigToggle,
+        }}>
             {children}
         </LibraryContext.Provider>
     );

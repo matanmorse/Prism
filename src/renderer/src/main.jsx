@@ -9,22 +9,26 @@ import { EmulatorProvider } from './contexts/SharedContext.jsx'
 import { ModalProvider, useModal } from './contexts/ModalContext.jsx'
 import ErrorModal from './modals/ErrorModal.jsx'
 import Debug from './pages/Debug.jsx'
+import { Library } from 'lucide-react'
+import { LibraryProvider } from './contexts/LibraryContext.jsx'
 
 
 const Router = import.meta.env.DEV ? BrowserRouter : HashRouter
 createRoot(document.getElementById('main')).render(
 <Router>
   <EmulatorProvider>
-  <ModalProvider>
-      <StrictMode>
-          <Routes>
-            <Route path="/" element={<Layout />}>
-              <Route index element={<App />} />
-              <Route path='/debug' element={<Debug />} />
-            </Route>
-          </Routes>
-      </StrictMode>
-  </ModalProvider>
+    <LibraryProvider>
+      <ModalProvider>
+          <StrictMode>
+              <Routes>
+                <Route path="/" element={<Layout />}>
+                  <Route index element={<App />} />
+                  <Route path='/debug' element={<Debug />} />
+                </Route>
+              </Routes>
+          </StrictMode>
+      </ModalProvider>
+    </LibraryProvider>
   </EmulatorProvider>,
 </Router>
 

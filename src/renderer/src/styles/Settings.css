@@ -178,6 +178,7 @@
 
   &:hover {
     cursor: pointer;
+    background-color: var(--clr-surface-active);
   }
 
   &.selected {

@@ -14,7 +14,7 @@ const GameCard = ({game}) => {
     const [hasConfiguredEmulator, setHasConfiguredEmulator] = useState(true); /* has an exe been properly configured for an emulator that supports this? */
     
     const { showModal, hideModal } = useModal();
-    const { libraryFilter, titleSearch } = useLibrary();
+    const { libraryFilter, titleSearch, hasConfigToggle } = useLibrary();
     const fileExtension = game.path.split('.').at(-1);
 
     const launchGame = async () => {
@@ -35,7 +35,7 @@ const GameCard = ({game}) => {
     useEffect(() => {
         CheckGameConfiguredEmulator(fileExtension).then(setHasConfiguredEmulator);
         window.configService.getSupportedEmulators(fileExtension).then(setSupportedEmulators);
-    }, [fileExtension]);
+    }, [fileExtension, hasConfigToggle]);
 
     if (!game 
         || (libraryFilter === 'needs_config' && hasConfiguredEmulator) 

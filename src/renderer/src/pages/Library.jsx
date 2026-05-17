@@ -8,18 +8,9 @@ import LibraryTopbar from '../components/library/LibraryTopbar'
 import { useLibrary } from '../contexts/LibraryContext'
 
 function App() {
-  const { games, setGames } = useLibrary();
+  const { games, fetchGames } = useLibrary();
 
-  useEffect(() => {
-      fetchGames();
-    }, []
-  );
-
-  const fetchGames = async () => {
-    const res = await window.fileService.getGames();
-    console.log(res);
-    setGames(res)
-  }
+  useEffect(() => {fetchGames()}, [])
 
   return (
     <>

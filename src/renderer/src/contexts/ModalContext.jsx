@@ -1,4 +1,4 @@
-import { createContext } from 'react';
+import { createContext, useEffect } from 'react';
 import '../styles/Modal.css'
 import { useContext } from 'react';
 import { useState } from 'react';
@@ -9,6 +9,10 @@ export function ModalProvider({ children }) {
 
     const showModal = (component) => setModal(component);
     const hideModal = () => setModal(null);
+
+    // Close modals with escape key
+    const handleKeyDown = (e) => { if (e.key === 'Escape' && modal !== null) hideModal();}
+    document.addEventListener('keydown', handleKeyDown);
 
     return (
         <ModalContext.Provider value={{ showModal, hideModal }}>

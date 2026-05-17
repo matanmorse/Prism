@@ -6,7 +6,6 @@ import Navbar from '../components/Navbar'
 import { useModal } from '../contexts/ModalContext'
 import ErrorModal from '../modals/ErrorModal'
 import Sidebar from '../components/sidebar/Sidebar'
-import { LibraryProvider } from '../contexts/LibraryContext'
 
 const Layout = () => {
     const { showModal, hideModal } = useModal();
@@ -19,10 +18,8 @@ const Layout = () => {
         <>
             <TitleBar />
             <div id="root">
-            <LibraryProvider>
                 <Sidebar />
                 <Outlet />
-            </LibraryProvider>
             </div>
         </>
     )

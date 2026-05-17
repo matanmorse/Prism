@@ -3,7 +3,7 @@ import { useLibrary } from "../../contexts/LibraryContext";
 import hasConfiguredEmulator from "../../utils/gameUtil";
 
 const LibraryTopbar = () => {
-    const {libraryFilter, setLibraryFilter, titleSearch, setTitleSearch, games} = useLibrary();
+    const {libraryFilter, setLibraryFilter, titleSearch, setTitleSearch, hasConfigToggle, games} = useLibrary();
     const [playableGamesCount, setPlayableGamesCount] = useState();
     
     const countPlayableGames = async () => {
@@ -17,7 +17,7 @@ const LibraryTopbar = () => {
         return results.filter(Boolean).length;
     }
 
-    useEffect(() => {countPlayableGames().then(setPlayableGamesCount)}, [games])
+    useEffect(() => {countPlayableGames().then(setPlayableGamesCount)}, [games, hasConfigToggle])
 
     return (
     <div className="library-topbar">
