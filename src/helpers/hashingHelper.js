@@ -1,11 +1,12 @@
 import {spawn} from 'node:child_process'
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { raHasherPath } from '../services/configService.js';
 import getGameLists from './RAAPIHelper.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-const RA_HASHER_EXE_PATH = path.join(__dirname, '../resources/RAHasher.exe')
+const RA_HASHER_EXE_PATH = raHasherPath; // gotten dynamically from config
 
 const searchForHashes = async (systemIds, romPath) => {
     // get list of hashes for the system and hashes for the rom
@@ -15,14 +16,13 @@ const searchForHashes = async (systemIds, romPath) => {
     ]);
 
     if(!gameLists || !hashes) return null;
-
+    
     // search for matches
     for (const id of systemIds) {
         const hash = hashes[id];
         if (!hash) continue;
 
         const gameList = gameLists[systemIds.indexOf(id)];
-        console.log(gameList);
         const game = gameList && gameList.find(x => x.hashes.includes(hash));
         if (!game) continue;
         console.log(`[Hashing Helper] Found hash match for game ${romPath}: ${game.title}`);
@@ -48,8 +48,9 @@ const hashRom = async (romPath, systemIds) => {
             return new Promise((resolve) => {
                 const rahasher = spawn(RA_HASHER_EXE_PATH, [id, romPath]);
                 let output = '';
-                // to view hashes, put this after the output+=data; 
-                //console.log(`hashing ${romPath} on system ${id} got ${output}`);
+                // to view hashes, put this after the output+=data;
+                // console.log(`hashing ${romPath} on system ${id} got ${output}`);
+
                 rahasher.stdout.on('data', (data) => {output += data;
                     });
                 rahasher.on('close', () => resolve({ id, hash: output.trim() || null }));

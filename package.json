@@ -11,6 +11,7 @@
     "7zip-bin": "^5.2.0",
     "adm-zip": "^0.5.17",
     "apicalypse": "^1.0.5",
+    "axios": "^1.16.1",
     "cross-env": "^10.1.0",
     "dotenv": "^17.4.2",
     "electron-squirrel-startup": "^1.0.1",
@@ -22,7 +23,7 @@
     "steamgriddb": "^2.2.1"
   },
   "scripts": {
-    "start": "electron-forge start",
+    "start": "nodemon --watch src --ext js,json --exec \"electron-forge start\"",
     "package": "electron-forge package",
     "make": "electron-forge make"
   },
@@ -42,6 +43,6 @@
     "rcedit": "^5.0.2"
   },
   "forge": {
-    "configPath": "./forge.config.cjs"
+    "configPath": "forge.config.cjs"
   }
 }

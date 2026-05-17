@@ -1,5 +1,4 @@
-import config, { getEmulatorPath } from "../services/configService.js";
-import { setEmulatorPath } from "../services/configService.js";
+import config, { getEmulatorPath, sevenZipPath, setEmulatorPath } from "../services/configService.js";
 import path from 'path'
 import {app} from 'electron'
 import fs from 'fs/promises'
@@ -37,7 +36,7 @@ const AutoInstallAndConfigure = (async (emulatorName) => {
     if (zipPath.endsWith('.7z') || emulatorName === 'Dolphin' || emulatorName === 'RPCS3' || emulatorName === 'PCSX2') {
         await new Promise((resolve, reject) => {
             const stream = Seven.extractFull(zipPath, installDir, {
-                $bin: sevenBin.path7za,
+                $bin: sevenZipPath,
             });
             stream.on('end', resolve);
             stream.on('error', reject);

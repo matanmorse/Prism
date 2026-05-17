@@ -8,10 +8,20 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const configRootPath = path.resolve(__dirname,'../../', 'config.json')
-
 const config = JSON.parse(readFileSync(configRootPath, 'utf-8'));
 
 const isDev = () => process.env.NODE_ENVIRONMENT === 'Development'
+
+/* Dynamically load locations of helper exes from bundle/local */
+const sevenZipPath = !app.isPackaged
+  ? path.join(import.meta.dirname, '../../', 'node_modules', '7zip-bin', 'win', 'x64', '7za.exe')
+  : path.join(process.resourcesPath, '7za.exe');
+
+const raHasherPath = !app.isPackaged
+  ? path.join(import.meta.dirname, '..', 'resources', 'RAHasher.exe')
+  : path.join(process.resourcesPath, 'RAHasher.exe');
+
+console.log(sevenZipPath, raHasherPath)
 
 const getEmulatorPath = (name) => settingsStore.get(`${name}-exe-path`)
 const getRomFolderPath = () => settingsStore.get('romfolder-path')
@@ -105,6 +115,6 @@ const getSupportedEmulators = (fileFormat) => {
 export {getEmulatorPath, getRomFolderPath, setEmulatorPath, 
     setRomFolderPath, hasSettings, resetSettings, getEmulators, 
     getEmulatorsPrettyNames, isDev, getEmulatorsConfig, resetRomFolderPath, hasEmulator,
-    getSupportedEmulators}
+    getSupportedEmulators, sevenZipPath, raHasherPath}
 
 export default config;

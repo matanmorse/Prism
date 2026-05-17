@@ -1,12 +1,17 @@
 const { FusesPlugin } = require('@electron-forge/plugin-fuses');
 const { FuseV1Options, FuseVersion } = require('@electron/fuses');
+const path = require('path');
 
 module.exports = {
   packagerConfig: {
     asar: true,
     name: "prism",
-    executableName: "prism",
-    icon: './src/resources/prism-icon-64px.ico'
+    executableName: "Prism",
+    icon: path.resolve(__dirname, 'src/resources/prism-icon-64px.ico'),
+    extraResource: [
+      path.resolve(__dirname, 'node_modules/7zip-bin/win/x64/7za.exe'),
+      path.resolve(__dirname, 'src/resources/RAHasher.exe')
+    ],
   },
   rebuildConfig: {},
   makers: [
@@ -48,7 +53,7 @@ module.exports = {
       [FuseV1Options.EnableNodeOptionsEnvironmentVariable]: false,
       [FuseV1Options.EnableNodeCliInspectArguments]: false,
       [FuseV1Options.EnableEmbeddedAsarIntegrityValidation]: true,
-      [FuseV1Options.OnlyLoadAppFromAsar]: true,
+      [FuseV1Options.OnlyLoadAppFromAsar]: false,
     }),
   ],
 };

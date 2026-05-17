@@ -2,6 +2,7 @@ import { romStore } from "./fileService.js"
 import { metadataCache } from "./metadataService.js"
 
 const clearCache = (key) => {
+    console.log(metadataCache.path)
     console.log('clearing ' + key)
     if (key === 'metadata') {
         metadataCache.delete('metadata')
