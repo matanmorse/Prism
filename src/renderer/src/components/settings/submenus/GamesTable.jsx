@@ -42,7 +42,7 @@ const GamesTable = () => {
             headerCheckbox.current.indeterminate = false;
         }
         // if none selected, check all boxes
-        if (selectedIds.size === 0) {
+        if (selectedIds.size === 0) {   
             games.map(g => {
                 toggleSelected(g.path)
             });

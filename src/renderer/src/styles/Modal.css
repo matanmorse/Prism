@@ -67,7 +67,7 @@
         }
     }
     .emulator-option-wrapper {
-        background-color: var(--clr-surface-1);
+        background-color: var(--clr-surface-2);
         border: 1px solid transparent;
         display: flex;
         flex-direction: row;
@@ -75,7 +75,7 @@
         align-items: center;
 
         &:hover {
-            background-color: var(--clr-surface-2);
+            background-color: var(--clr-surface-3);
             cursor: pointer;
         }
 
@@ -86,15 +86,18 @@
         &.disabled {
             pointer-events: none;
             cursor:not-allowed;
-            background-color: rgba(0, 0, 0, 0.1);
+            background-color: var(--clr-surface-1)
         }
 
         &.selected > .label-wrapper > p {
             color: var(--clr-primary-1)
         }
         & > p {
-            padding: 10px;
+            padding: 5px 10px 5px 10px;
             margin: 0rem;
+            margin-right: .5rem;
+            background-color: rgba(255,0,0,0.1);
+            border-radius: 5px;
         }
 
     }

@@ -14,7 +14,8 @@ const GameCard = ({game}) => {
     const [isLoading, setIsLoading] = useState(false)
     const [supportedEmulators, setSupportedEmulators] = useState([]);
     const [hasConfiguredEmulator, setHasConfiguredEmulator] = useState(true); /* has an exe been properly configured for an emulator that supports this? */
-    
+    const [isHover, setIsHover] = useState(false)
+
     const { showModal, hideModal } = useModal();
     const { libraryFilter, titleSearch, hasConfigToggle, fetchGames } = useLibrary();
     const fileExtension = game.path.split('.').at(-1);
@@ -74,15 +75,16 @@ const GameCard = ({game}) => {
     ) return; // don't render until game has finished fetching or if it is filtered out
     else return (
     <>
-        <div className="game-card-wrapper">
-            <EmulatorIconList emulatorNameList={game.preferred_emulator ? [game.preferred_emulator] : supportedEmulators}/>
+        <div className="game-card-wrapper"
+            onMouseEnter={() => setIsHover(true)} 
+            onMouseLeave={() => setIsHover(false)}
+            onClick={launchGame}
+        >
+            <div className={`invis-box ${isHover && 'visible'}`}>
+                <EmulatorIconList emulatorNameList={game.preferred_emulator ? [game.preferred_emulator] : supportedEmulators}/>
+            </div>
             <div className="game-card-image-wrapper" style={{backgroundImage: `url(${game.coverArt})`}}>
                 {isLoading && <ClipLoader className="game-card-loader" size={60} color='blue'/>}
-                <div className="game-info"> 
-                    <button className="btn btn-primary btn-icon" onClick={launchGame}>
-                        <PlayCircleIcon/>
-                    </button>
-                </div>
             {!game.name && <p style={{textWrap:'wrap', wordBreak: 'break-word'}}>{game.path}</p>}
             </div>
         </div>
