@@ -5,6 +5,7 @@
   "authors": "Matan Morse",
   "description": "A launcher for video game emulators.",
   "productName": "Prism",
+  "repository": "https://github.com/matanmorse/Prism",
   "type": "module",
   "dependencies": {
     "@retroachievements/api": "^2.10.0",

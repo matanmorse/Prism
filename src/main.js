@@ -19,6 +19,7 @@ import { updateElectronApp } from 'update-electron-app';
 dotenv.config({quiet: true})
 
 if (app.isPackaged || process.env.FORCE_UPDATE_CHECK) {
+    console.log('!!UPDATING APP!!')
     updateElectronApp()
 }
 

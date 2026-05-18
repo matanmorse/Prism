@@ -62,6 +62,7 @@ module.exports = {
       config: {
         repository: { owner: 'matanmorse', name: 'Prism' },
         prerelease: false,
+        draft: false,
       }
     }
   ]
