@@ -12,7 +12,7 @@ export function LibraryProvider({ children }) {
     /* Get games via IPC */
     const fetchGames = async () => {
         const res = await window.fileService.getGames();
-        console.log(res)
+        console.table(res)
         setGames(res)
     }
 

@@ -30,11 +30,8 @@ const GameCard = ({game}) => {
             />); 
             return;
         }
-        /* If >1 emulator configured for this file type, open modal to allow the user to choose emulator to launch with */
-        const configuredEmulators = await allConfiguredEmulators(fileExtension)
-        console.log(game)
-        console.log(configuredEmulators)
-        if (configuredEmulators.length > 1 && !game.preferred_emulator) {
+        /* If >1 emulator supported for this file type, open modal to allow the user to choose emulator to launch with */
+        if (supportedEmulators.length > 1 && !game.preferred_emulator) {
             showModal(<SelectEmulatorModal 
                     romPath={game.path}
                     onConfirm={launchWithEmulator}
@@ -44,7 +41,13 @@ const GameCard = ({game}) => {
             return;
         }
         setIsLoading(true);    
-        await window.launchGameService.launchGame(game.path)
+        try {
+            await window.launchGameService.launchGame(game.path)
+        }
+        catch (error) {
+            console.log(`[${game.title} Card] Error Launching`)
+        }
+        fetchGames()
         setIsLoading(false);
     } 
     
