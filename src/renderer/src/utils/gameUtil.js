@@ -8,4 +8,17 @@ const hasConfiguredEmulator = async (fileExtension) => {
         .some(e => e.exePath);
 };
 
+const allConfiguredEmulators = async (fileExtension) => {
+    const supportedEmulators = await window.configService.getSupportedEmulators(fileExtension);
+    if (supportedEmulators.length === 0) return false;
+
+    const emulatorsConfig = await window.configService.getEmulatorsConfig();
+    return emulatorsConfig
+        .filter(e => supportedEmulators.includes(e.name))
+        .filter(e => e.exePath);//
+};
+
 export default hasConfiguredEmulator;
+export {
+    allConfiguredEmulators
+}

@@ -1,19 +1,28 @@
 import {spawn} from 'child_process'
-import config, {getEmulatorPath, getRomFolderPath, hasEmulator} from './configService.js'
+import config, {getEmulatorPath, getPreferredEmulator, getRomFolderPath, hasEmulator, setPreferredEmulator} from './configService.js'
 
 /* Launches a game given ROM path (emulator is inferred from supported file types in the emulators config */
-const launchGame = async (romPath) => {
+const launchGame = async (romPath, emulator, remember) => {
     return new Promise(resolve => {
-        // TODO: add more advanced emulator picking logic in case multiple emulators support the same file type (ex: .bin supported by melonDS and Citra)
-        const fileType = romPath.split('.').at(-1)
-        const emulators = getEmulatorsFromExtension(fileType)
-        const emulator = emulators.find(e => hasEmulator(e)); // pick first configured emulator
+        console.log(`Rompath: ${romPath}, Emulator: ${emulator}, Remember: ${remember}`)
+        /* Remember emulator preference if client asks us to */
+        if (emulator !== undefined && remember) setPreferredEmulator(romPath, emulator)
+        if (emulator === undefined) emulator = getPreferredEmulator(romPath);
 
+        // If no emulator was given by client and no preferred is recorded, infer it from file type
+        // This should only occur client-side when only 1 valid emulator exists for a file type
+        if (emulator === undefined) {
+            const fileType = romPath.split('.').at(-1)
+            const emulators = getEmulatorsFromExtension(fileType)
+            const inferredEmulator = emulators.find(e => hasEmulator(e)); // pick first configured emulator
+            emulator = inferredEmulator
+            console.log(`[Launch Game Service] Inferred Emulator ${inferredEmulator} for ${romPath}`)
+        }
         const perEmulatorCLIArgs = config.emulators.find(x => x.name === emulator).cliArgs || []
 
-        console.log(`Launching game with rom path ${romPath} command ${getEmulatorPath(emulator).split('\\').slice(-1)[0]} ${perEmulatorCLIArgs.join(' ')} ${romPath}`)
+        console.log(`[Launch Game Service] Launching game with rom path ${romPath} command ${getEmulatorPath(emulator).split('\\').slice(-1)[0]} ${perEmulatorCLIArgs.join(' ')} ${romPath}`)
         const game = spawn(getEmulatorPath(emulator), [...perEmulatorCLIArgs, romPath])
-            
+        
         game.stdout.setEncoding('utf8')
 
         game.addListener('close', () => {

@@ -38,7 +38,7 @@ contextBridge.exposeInMainWorld('windowService', {
 })
 
 contextBridge.exposeInMainWorld('launchGameService', {
-  launchGame: async (romPath) => invoke('launchGame', romPath)
+  launchGame: async (romPath, emulator, remember) => invoke('launchGame', romPath, emulator, remember)
 })
 
 contextBridge.exposeInMainWorld('autoInstallService', {

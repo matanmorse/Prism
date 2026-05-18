@@ -3,6 +3,7 @@ import path from 'path';
 import Store from 'electron-store'
 import { readFileSync } from 'fs';
 import { fileURLToPath } from 'url';
+import { metadataCache } from './metadataService.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -110,9 +111,23 @@ const getSupportedEmulators = (fileFormat) => {
     return res;
 }
 
+/* When multiple emulators support a single format, remember which one to use in metadata store */
+const setPreferredEmulator = (romPath, emulatorName) => {
+    console.log('[Config Service] Setting preferred emulator for ', romPath, 'to', emulatorName)
+    const metadata = metadataCache.get('metadata', {})
+    metadata[romPath] = { ...metadata[romPath], preferred_emulator: emulatorName }
+    metadataCache.set('metadata', metadata)
+}
+const getPreferredEmulator = (romPath) => {
+    const metadata = metadataCache.get('metadata', undefined);
+    if (!romPath || !metadata) return;
+    return metadata[romPath].preferred_emulator
+}
+
 export {getEmulatorPath, getRomFolderPath, setEmulatorPath, 
     setRomFolderPath, hasSettings, resetSettings, getEmulators, 
     getEmulatorsPrettyNames, isDev, getEmulatorsConfig, resetRomFolderPath, hasEmulator,
+    setPreferredEmulator, getPreferredEmulator,
     getSupportedEmulators, sevenZipPath, raHasherPath}
 
 export default config;

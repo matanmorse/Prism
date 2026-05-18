@@ -64,7 +64,7 @@ app.whenReady().then(() => {
     
     handleIpc('ping', () => 'hello from main')
     handleIpc('readFiles', async () => readFiles())
-    handleIpc('launchGame', async (event, romPath) => launchGame(romPath))
+    handleIpc('launchGame', async (event, romPath, emulator, remember) => launchGame(romPath, emulator, remember))
     handleIpc('select-exe', async (event, emulator) => selectExe(emulator))
     handleIpc('get-games', async () => getGames())
     handleIpc('select-rom-folder', async () => selectRomFolder())

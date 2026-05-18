@@ -126,6 +126,7 @@ a:hover {
   border-color: rgba(74, 222, 128, 0.4);
 }
 
+
 /* Disabled state for all buttons */
 .btn:disabled {
   opacity: 0.5;
@@ -203,8 +204,16 @@ button:focus-visible {
   pointer-events: none;
 }
 
+.text-danger {
+  color: #f87171;
+}
+
 .text-highlight {
   color: var(--clr-text-primary) !important;
+}
+
+.text-primary {
+  color: var(--clr-primary-1)
 }
 
 .text-info {
@@ -398,6 +407,9 @@ input[type="checkbox"]:disabled {
   background: rgba(192, 92, 246, 0.2);
 }
 
+.header-noweight {
+  font-weight: normal;
+}
 
 * {
   --clr-surface-0: rgb(25, 25, 40);

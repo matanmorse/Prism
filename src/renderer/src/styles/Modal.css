@@ -46,3 +46,71 @@
     gap: 0.75rem;
     justify-content: flex-end;
 }
+
+.select-emulator-modal {
+    .emulator-options {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+    }
+    .modal-bottom {
+        margin-top: .75rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+    }
+
+    .emulator-option-wrapper {
+        background-color: var(--clr-surface-1);
+        border: 1px solid transparent;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+
+        &:hover {
+            background-color: var(--clr-surface-2);
+            cursor: pointer;
+        }
+
+        &.selected {
+            background-color: var(--clr-primary-active);
+            border: 1px solid var(--clr-primary-border)
+        }
+        &.disabled {
+            pointer-events: none;
+            cursor:not-allowed;
+            background-color: rgba(0, 0, 0, 0.1);
+        }
+
+        &.selected > .label-wrapper > p {
+            color: var(--clr-primary-1)
+        }
+        & > p {
+            padding: 10px;
+            margin: 0rem;
+        }
+
+    }
+
+    .modal-header {
+        margin-bottom: 1rem;
+
+        & > p {
+            font-size: 14px;
+        }
+    }
+
+    .remember-checkbox {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        padding: 5px;
+
+        &:hover, & > label:hover  {
+            cursor: pointer;
+        }
+     
+    }
+}

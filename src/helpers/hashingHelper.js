@@ -6,7 +6,6 @@ import {getGameLists} from './metadataHelper.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-const RA_HASHER_EXE_PATH = raHasherPath; // gotten dynamically from config
 
 const searchForHashes = async (systemIds, romPath) => {
     // get list of hashes for the system and hashes for the rom
@@ -46,7 +45,7 @@ const hashRom = async (romPath, systemIds) => {
     const results = await Promise.all(
         systemIds.map(async (id) => {
             return new Promise((resolve) => {
-                const rahasher = spawn(RA_HASHER_EXE_PATH, [id, romPath]);
+                const rahasher = spawn(raHasherPath, [id, romPath]);
                 let output = '';
                 // to view hashes, put this after the output+=data;
                 // console.log(`hashing ${romPath} on system ${id} got ${output}`);
