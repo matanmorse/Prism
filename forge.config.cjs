@@ -56,4 +56,13 @@ module.exports = {
       [FuseV1Options.OnlyLoadAppFromAsar]: false,
     }),
   ],
+  publishers: [
+    {
+      name: '@electron-forge/publisher-github',
+      config: {
+        repository: { owner: 'matanmorse', name: 'Prism' },
+        prerelease: false,
+      }
+    }
+  ]
 };

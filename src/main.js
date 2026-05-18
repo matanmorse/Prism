@@ -10,12 +10,17 @@ import { launchGame } from './services/launchGameService.js';
 import { getEmulatorsConfig, getSupportedEmulators, hasSettings, isDev, resetRomFolderPath, resetSettings } from './services/configService.js'
 import { AutoInstallAndConfigure } from './services/autoInstallService.js'
 import dotenv from 'dotenv'
-import startup from 'electron-squirrel-startup'; // Use import for ESM
+import startup from 'electron-squirrel-startup'; 
 import { getMetadata, metadataCache } from './services/metadataService.js';
 import withCache, { clearCache } from './caching.js';
 import { clearCache as clearCacheDebug, clearRoms } from './services/debugService.js';
+import { updateElectronApp } from 'update-electron-app';
 
 dotenv.config({quiet: true})
+
+if (app.isPackaged || process.env.FORCE_UPDATE_CHECK) {
+    updateElectronApp()
+}
 
 if (startup) {app.quit()}
 
