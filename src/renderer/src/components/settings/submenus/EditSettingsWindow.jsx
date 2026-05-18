@@ -33,6 +33,7 @@ const EditSettingsWindow = ({selectedEmulator, ResetEmulator, SetEmulator, Selec
     }
 
     const DoManualSelect = async (e) => {
+        e.preventDefault();
         await SetEmulator(e, selectedEmulator)
         setHasConfigToggle(!hasConfigToggle);
     }
@@ -52,7 +53,7 @@ const EditSettingsWindow = ({selectedEmulator, ResetEmulator, SetEmulator, Selec
                         <i className="reset-emulator bi bi-x-lg" onClick={(e) => {setHasConfigToggle(!hasConfigToggle); ResetEmulator(e, selectedEmulator)}}></i>
                     </div>
                 </div>
-                <button className="exe-input-button btn btn-primary" onClick={(e) => {setHasConfigToggle(!hasConfigToggle); (e, selectedEmulator)}}><i className="bi bi-folder" style={{fontSize: '16pt'}}></i> Browse</button>
+                <button className="exe-input-button btn btn-primary" onClick={(e) => {DoManualSelect(e, selectedEmulator)}}><i className="bi bi-folder" style={{fontSize: '16pt'}}></i> Browse</button>
             </div>
 
             {SelectedEmulatorExePath(selectedEmulator) !== undefined ?

@@ -1,5 +1,6 @@
 import path from 'path'
 import fs from 'fs/promises'
+import fs_sync from 'fs'
 import os from 'os'
 import config, { setEmulatorPath } from './configService.js';
 import { romStore } from './fileService.js';
@@ -10,6 +11,7 @@ const DEFAULT_SCAN_FOLDERS = [
   path.join(os.homedir(), 'Desktop'),
   path.join(os.homedir(), 'Downloads'),
   path.join(os.homedir(), 'Documents'),
+  path.join(os.homedir(), 'DOESNT EXIST'),
   process.env.APPDATA,
 ].filter(Boolean);
 
@@ -17,7 +19,7 @@ const doRomAutoScan = async() => {
     var scanResult = await Promise.all(DEFAULT_SCAN_FOLDERS.map(async (folder) => {
         return await scanForRoms(folder);
     }))
-    scanResult = scanResult.flat(Infinity);
+    scanResult = scanResult.flat(Infinity).filter(Boolean);
     // only set new/unique roms
     const existing = romStore.get('roms') ?? [];
     const merged = [...new Set([...existing, ...scanResult])];
@@ -33,7 +35,8 @@ const doRomAutoScan = async() => {
 /* Returns all valid roms within the folder and its subfolders */
 const scanForRoms = async (folderPath) => {
     const roms = [];    
-  
+    if (!fs_sync.existsSync(folderPath)) return;
+
     const scan = async (dir) => {
         // console.log(`[Scanner] Scanning ${dir}`)
 
@@ -67,6 +70,8 @@ const doEmulatorAutoScan = async(emulatorName) => {
 }
 
 const scanForExe = async (filename, dir) => {
+    if (!fs_sync.existsSync(dir)) return;
+    
     const scan = async (dir) => {
         const entries = await fs.readdir(dir, { withFileTypes: true });
         const result = await Promise.all(entries.map(async (entry) => {

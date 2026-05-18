@@ -4,6 +4,7 @@ import { clearCache } from "../caching.js";
 import {sanitizeRomName, getCoverArtFromName, getIGBBMetadata} from "../helpers/metadataHelper.js";
 import { hashRom, searchForHashes } from "../helpers/hashingHelper.js";
 import axios from 'axios';
+import { romStore } from "./fileService.js";
 
 const systemNames2SystemID = {
     "Nintendo 64": 2,
@@ -77,13 +78,10 @@ const metadataClient = axios.create({
 const metadataCache = new ElectronStore();
 
 const getMetadata = async (path) => {
-    console.log(path)
+    if (!path) return {}
     const systemIds = fileEndingsToSystemID[path.split('.').at(-1)];
     const filename = path.split('\\').at(-1);
-    console.log('ending: ')
-    console.log(path.split('.').at(-1))
-    console.log(systemIds)
-    // console.log(`System ids for ${filename} and ending ${path.split('.').at(-1)}`, systemIds)
+
     // Try to find canonical game title by its ROM, if no match found, sanitize ROM filename and use that as the title
     var game = await searchForHashes(systemIds, path)
     if (game === null) {
