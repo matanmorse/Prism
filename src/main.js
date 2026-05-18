@@ -7,7 +7,7 @@ import path from 'node:path'
 import { selectExe, selectRomFolder, getGames, removeGame } from './services/fileService.js';
 import { doEmulatorAutoScan, doRomAutoScan } from './services/scanService.js';
 import { launchGame } from './services/launchGameService.js';
-import { getEmulatorsConfig, getSupportedEmulators, hasSettings, isDev, resetRomFolderPath, resetSettings } from './services/configService.js'
+import { getEmulatorsConfig, getSupportedEmulators, hasSettings, isDev, resetRomFolderPath, resetSettings, setPreferredEmulator } from './services/configService.js'
 import { AutoInstallAndConfigure } from './services/autoInstallService.js'
 import dotenv from 'dotenv'
 import startup from 'electron-squirrel-startup'; 
@@ -79,6 +79,7 @@ app.whenReady().then(() => {
     handleIpc('do-rom-auto-scan', () => doRomAutoScan())
     handleIpc('do-emulator-auto-scan', (e, emulatorName) => doEmulatorAutoScan(emulatorName))
     handleIpc('remove-game', (e, toDeletePath) => removeGame(toDeletePath))
+    handleIpc('set-preferred-emulator', (e, romPath, emulatorName) => setPreferredEmulator(romPath, emulatorName))
 
     handleIpc('window-minimize', () => win.minimize());
     handleIpc('window-maximize', () => {

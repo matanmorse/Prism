@@ -28,7 +28,8 @@ contextBridge.exposeInMainWorld('configService', {
   resetSettings: (emulatorName) => invoke('reset-settings', emulatorName),
   resetRomFolder: () => invoke('reset-romfolder'),
   getEmulatorsConfig: () => invoke('get-emulators-config'),
-  getSupportedEmulators: (fileFormat) => invoke('get-supported-emulators', fileFormat)
+  getSupportedEmulators: (fileFormat) => invoke('get-supported-emulators', fileFormat),
+  setPreferredEmulator: (romPath, emulatorName) => invoke('set-preferred-emulator', romPath, emulatorName)
 })
 
 contextBridge.exposeInMainWorld('windowService', {

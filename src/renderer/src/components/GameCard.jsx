@@ -32,13 +32,13 @@ const GameCard = ({game}) => {
         }
         /* If >1 emulator configured for this file type, open modal to allow the user to choose emulator to launch with */
         const configuredEmulators = await allConfiguredEmulators(fileExtension)
+        console.log(game)
+        console.log(configuredEmulators)
         if (configuredEmulators.length > 1 && !game.preferred_emulator) {
             showModal(<SelectEmulatorModal 
-                emulators={supportedEmulators.sort((a,b) => configuredEmulators.some((x) => x.name === b)- configuredEmulators.some((x) => x.name === a))} 
-                configuredEmulators={configuredEmulators}
-                game={game}
-                fileExtension={fileExtension}
-                launchGame={launchWithEmulator}
+                    romPath={game.path}
+                    onConfirm={launchWithEmulator}
+                    doLaunch={true}
                 />
             )
             return;
@@ -74,7 +74,7 @@ const GameCard = ({game}) => {
         <div className="game-card-wrapper">
             <EmulatorIconList emulatorNameList={game.preferred_emulator ? [game.preferred_emulator] : supportedEmulators}/>
             <div className="game-card-image-wrapper" style={{backgroundImage: `url(${game.coverArt})`}}>
-                {isLoading && <ClipLoader class="game-card-loader" size={60} color='blue'/>}
+                {isLoading && <ClipLoader className="game-card-loader" size={60} color='blue'/>}
                 <div className="game-info"> 
                     <button className="btn btn-primary btn-icon" onClick={launchGame}>
                         <PlayCircleIcon/>

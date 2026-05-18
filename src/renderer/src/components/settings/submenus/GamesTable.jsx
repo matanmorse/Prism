@@ -1,12 +1,13 @@
 import { useEffect, useRef, useState } from "react";
 import { useLibrary } from "../../../contexts/LibraryContext";
-import { Trash } from "lucide-react";
+import { Trash, Gamepad } from "lucide-react";
 import { useModal } from "../../../contexts/ModalContext";
 import GameDeleteModal from "../../../modals/GameDeleteModal";
+import SelectEmulatorModal from "../../../modals/SelectEmulatorModal";
 
 const GamesTable = () => {
-    const {games} = useLibrary();
-    const {showModal} = useModal();
+    const {games, fetchGames} = useLibrary();
+    const {showModal, hideModal} = useModal();
 
     const headerCheckbox = useRef();
     
@@ -18,6 +19,20 @@ const GamesTable = () => {
             return next;
         });
     };
+    
+    const openGameSettingsModal = async () => {
+        const romPath = selectedIds.values().next().value // o_O
+        showModal(
+        <SelectEmulatorModal
+            romPath={romPath}
+            onConfirm={async (selected, remember) => {
+                await window.configService.setPreferredEmulator(romPath, selected)
+                fetchGames()
+                hideModal()
+            }}
+        />
+        )
+    }
 
     const handleHeaderClick = (e) => {
         // if indeterminate, remove all checks
@@ -65,28 +80,37 @@ const GamesTable = () => {
         <>
             <div className="games-table-topbar">
                 <h4>Loaded Games ({games.length})</h4>
-                <button 
-                class="btn btn-danger btn-disabled btn-icon" 
-                disabled={!selectedIds.size > 0}
-                onClick={() => 
-                showModal(<GameDeleteModal games={games.filter(g => selectedIds.has(g.path))}/>)}>
-                    <Trash />
-                </button>
+                <div className="button-group">
+                    <button
+                    className="btn btn-primary btn-icon"
+                    disabled={!(selectedIds.size === 1)}
+                    onClick={() => openGameSettingsModal()}>
+                        <Gamepad />
+                    </button>
+                    <button
+                    className="btn btn-danger  btn-icon"
+                    disabled={!selectedIds.size > 0}
+                    onClick={() =>
+                    showModal(<GameDeleteModal games={games.filter(g => selectedIds.has(g.path))}/>)}>
+                        <Trash />
+                    </button>
+                </div>
+
             </div>
             <div className="table-wrapper">
                 <table className="table table-striped table-outlind">
                     <thead>
                         <tr>
-                            <td><input ref={headerCheckbox} type="checkbox" onClick={(e) => handleHeaderClick(e)}/></td>
+                            <td style={{width: '20px'}}><input ref={headerCheckbox} type="checkbox" onClick={(e) => handleHeaderClick(e)}/></td>
                             <td>Name</td>
-                            <td>Released</td>
+                            <td style={{textAlign: 'right'}}>Released</td>
                         </tr>
                     </thead>
                     <tbody>
                         {games.map((g, key) => {
                             return (
                             <tr key={key}>
-                                <td><input type="checkbox" checked={selectedIds.has(g.path)} onClick={() => toggleSelected(g.path)} /></td>
+                                <td><input type="checkbox" readOnly checked={selectedIds.has(g.path)} onClick={() => toggleSelected(g.path)} /></td>
                                 <td>"{g.title}"</td>
                                 <td style={{textAlign: 'right'}}>{new Date(g.first_release_date * 1000).toLocaleDateString()}</td>
                             </tr>)

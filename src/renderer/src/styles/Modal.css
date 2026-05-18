@@ -59,8 +59,13 @@
         align-items: center;
         justify-content: space-between;
         gap: 10px;
-    }
 
+        .inside-button {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+    }
     .emulator-option-wrapper {
         background-color: var(--clr-surface-1);
         border: 1px solid transparent;
