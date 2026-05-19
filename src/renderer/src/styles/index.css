@@ -35,13 +35,56 @@ body {
   width:100%;
 }
 
-/* Where content starts */
 #root {
-  display :flex;
-  text-align: center;
+  position: relative;
+  display: flex;
+  justify-content: center;
   background-color: var(--clr-surface-a0);
   overflow: hidden;
   height: calc(100vh - 30px);
+}
+
+.library, .sidebar {
+  position: relative;
+}
+
+.library::before {
+  content: ''; 
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 20% 30%, rgba(155, 144, 181, 0.342) 0%, transparent 50%),
+              radial-gradient(ellipse at 80% 70%, rgba(70, 158, 174, 0.304) 0%, transparent 50%);
+  filter: blur(40px);
+  pointer-events: none; 
+}
+
+.sidebar::before {
+    content: ''; 
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 20% 30%, rgba(138, 92, 246, 0.034) 0%, transparent 50%),
+              radial-gradient(ellipse at 80% 70%, rgba(97, 196, 214, 0.064) 0%, transparent 50%);
+  filter: blur(40px);
+  pointer-events: none; 
+}
+
+.bg-dots {
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(circle, rgba(138, 92, 246, 0.203) 1px, transparent 1px);
+  background-size: 24px 24px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.library::after  {
+  content: '';
+  position: absolute;
+  inset: 0;
+  filter: blur(60px) saturate(0.6);
+  opacity: 0.15;
+  transition: background-image 0.4s ease, opacity 0.4s ease;
+  pointer-events: none;
 }
 
 h1, h2, h3, h4, h5, h6 {

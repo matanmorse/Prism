@@ -2,11 +2,13 @@ import '../styles/TitleBar.css'
 import appIcon from '../../static/images/app-icon.png'
 import PrismIcon from './PrismIcon';
 const TitleBar = () => {
+  const version = __APP_VERSION__
+  console.log(version)
     return (
     <div className="title-bar">
         <div className="title-box">
             <PrismIcon size={1.25} />
-            <div className="title">Prism v1.0</div>
+            <div className="title">Prism v{version}</div>
         </div>
       <div className="window-controls">
         <button className="btn" onClick={() => window.windowService.minimize()}>–</button>

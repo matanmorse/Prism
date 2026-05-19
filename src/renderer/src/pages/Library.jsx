@@ -15,6 +15,7 @@ function App() {
   return (
     <>
       <div className="library">
+        <div className="bg-dots" />
         <LibraryTopbar />
         <div className="game-card-grid">
           {games.map((game, index) => (
