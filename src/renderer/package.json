@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "@noriginmedia/norigin-spatial-navigation": "^3.1.0",
     "@vitejs/plugin-react": "^5.0.1",
     "lucide-react": "^1.9.0",
     "react": "^19.2.5",

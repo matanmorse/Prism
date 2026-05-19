@@ -10,7 +10,7 @@ import { useLibrary } from '../contexts/LibraryContext'
 import CheckGameConfiguredEmulator, { allConfiguredEmulators } from '../utils/gameUtil.js'
 import SelectEmulatorModal from '../modals/SelectEmulatorModal.jsx'
 
-const GameCard = ({game}) => {
+const GameCard = ({game, size=1}) => {
     const [isLoading, setIsLoading] = useState(false)
     const [supportedEmulators, setSupportedEmulators] = useState([]);
     const [hasConfiguredEmulator, setHasConfiguredEmulator] = useState(true); /* has an exe been properly configured for an emulator that supports this? */
@@ -76,6 +76,7 @@ const GameCard = ({game}) => {
     else return (
     <>
         <div className="game-card-wrapper"
+            style={{'--game-card-size':`${size * 180}px`}}
             onMouseEnter={() => setIsHover(true)} 
             onMouseLeave={() => setIsHover(false)}
             onClick={launchGame}

@@ -1,11 +1,13 @@
+import {Outlet} from 'react-router-dom'
+import settingsIcon from '../../static/icons/settings-cogwheel-button.svg'
+import TitleBar from '../components/TitleBar'
 import { useEffect, useState } from 'react'
+import Navbar from '../components/Navbar'
 import { useModal } from '../contexts/ModalContext'
 import ErrorModal from '../modals/ErrorModal'
-import { useBigPicture } from '../contexts/BigPictureContext';
-import BigPictureLayout from './BigPictureLayout';
-import DesktopLayout from './DesktopLayout';
+import Sidebar from '../components/sidebar/Sidebar'
 
-const Layout = () => {
+const DesktopLayout = () => {
     const { showModal, hideModal } = useModal();
     useEffect(() => {
         const handler = (event) => {
@@ -16,10 +18,16 @@ const Layout = () => {
         return () => window.removeEventListener('unhandledrejection', handler);
     }, []); // empty dep array = register once on mount, clean up on unmount
 
-    const { isBigPicture } = useBigPicture()
 
-    if (isBigPicture) return <BigPictureLayout />
-    else return <DesktopLayout />
+    return (
+        <>
+            <TitleBar />
+            <div id="root">
+                <Sidebar />
+                <Outlet />
+            </div>
+        </>
+    )
 }
 
-export default Layout
+export default DesktopLayout
