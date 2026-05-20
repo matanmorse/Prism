@@ -13,16 +13,32 @@
     position: sticky;
     left: 0;
     width: 90vw;
-}
 
-.topbar-button-group {
-    display: flex;
-    gap: 8px;
-    margin-top: .5rem;
-    .btn {
-        font-size: 24px;
+
+
+    .topbar-button-group {
+        display: flex;
+        gap: 20px;
+        margin-top: .5rem;
+        transition: transform .2s ease;
+        transform-origin: top left;
+        &:has(.focused) {
+            transform: scale(1.05);
+        }
+        & > .focusable {
+            outline: 4px solid transparent;
+            outline-offset: 2px;
+        }
+        & > .focused {
+            outline: 4px solid var(--clr-primary-active);
+        }
+        & > button {
+            font-size: 24px;
+        }
     }
 }
+
+
 
 .games-title {
     display: flex;
@@ -36,15 +52,18 @@
     align-items: center;
     gap: 32px;
     position: fixed;
-    right: 50%;
+    bottom: 0;
     left: 50%;
-    bottom: 0px;
-    width: max-content;
     translate: -50% -50%;
-    padding: 16px 16px 16px 16px;
-    border-radius: 32px;
+    border-radius: 16px;
     background-color: rgba(0, 0, 0, 0.25);
+    padding: 20px;
+    transition: padding 0.3s ease-in-out;
 
+    &:has(.focused) {
+        transform: scale(1.05)
+    }
+    
     & > * {
         color: rgb(215, 215, 215);
         padding: 0rem;
@@ -58,6 +77,24 @@
 }
 .games-carousel {
     display: flex;
-    gap: 16px;
     width: fit-content;
+}
+
+
+
+.focusable {
+    transition: none;
+    outline: 8px solid transparent;
+    outline-offset: 4px;
+    transition: outline-color .1s ease, outline-offset 0.15s ease;
+    box-shadow: none;
+    transition: outline-color 0.15s ease,
+                outline-offset 0.15s ease,
+                box-shadow 0.2s ease,
+                transform 0.15s ease;
+    &.focused {
+        outline: 8px solid var(--clr-primary-active);
+        transform: scale(1.05);
+
+    }
 }

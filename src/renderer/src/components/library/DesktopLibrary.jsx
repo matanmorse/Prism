@@ -18,7 +18,7 @@ function DesktopLibrary() {
           <LibraryTopbar />
           <div className="game-card-grid">
             {games.map((game, index) => (
-              <GameCard key={index} game={game}/>
+              <GameCard key={index} game={game} size={1.4}/>
             ))}
           </div>
         </div>

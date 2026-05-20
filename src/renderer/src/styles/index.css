@@ -38,7 +38,7 @@ body {
 #root {
   position: relative;
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   background-color: var(--clr-surface-a0);
   overflow: hidden;
   height: calc(100vh - 30px);
@@ -115,6 +115,7 @@ a:hover {
   transition: all 0.15s ease;
   color: var(--clr-text-primary);
   height: fit-content;
+  background: transparent;
 }
 
 /* Primary - main actions */
@@ -123,12 +124,12 @@ a:hover {
   border-color: var(--clr-primary-border);
   color: var(--clr-primary-1);
 }
-.btn-primary:hover {
+.btn-primary:hover, .btn-primary.focused {
   background: rgba(139, 92, 246, 0.3);
   border-color: rgba(192, 92, 246, 0.5);
 }
 
-.btn-primary.selected:hover{
+.btn-primary.selected:hover, btn-primary.selected.focused{
   background: rgba(139, 92, 246, 0.2);
   border-color: var(--clr-primary-border);
   color: var(--clr-primary-1);
@@ -141,7 +142,7 @@ a:hover {
   color: var(--clr-text-secondary)
 }
 
-.btn-ghost:hover {
+.btn-ghost:hover, .btn-ghost.focused {
   background: var(--clr-surface-3);
   border-color: rgba(255, 255, 255, 0.12);
   color: var(--clr-text-primary)

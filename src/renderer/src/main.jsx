@@ -12,8 +12,14 @@ import Debug from './pages/Debug.jsx'
 import { Library } from 'lucide-react'
 import { LibraryProvider } from './contexts/LibraryContext.jsx'
 import { BigPictureProvider } from './contexts/BigPictureContext.jsx'
+import { init } from '@noriginmedia/norigin-spatial-navigation-core';
 
 const Router = import.meta.env.DEV ? BrowserRouter : HashRouter
+
+init({
+  debug: false,
+  visualDebug: false,
+});
 
 createRoot(document.getElementById('main')).render(
 <StrictMode>
