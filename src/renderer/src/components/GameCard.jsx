@@ -92,6 +92,7 @@ const GameCard = ({game, size=1}) => {
             onMouseEnter={() => setIsHover(true)} 
             onMouseLeave={() => setIsHover(false)}
             onClick={launchGame}
+            data-title={game.name}
             ref={ref}
         >
             <div className={`invis-box ${isHover && 'visible'}`}>

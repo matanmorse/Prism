@@ -9,13 +9,16 @@
 
 .bigpicture-library-topbar {
     display: flex;
-    flex-direction: column;
     position: sticky;
     left: 0;
     width: 90vw;
+    align-items: center;
+    gap: 64px;
+    margin-bottom: 1rem;
 
-
-
+    .games-title {
+        color: var(--clr-text-secondary)
+    }
     .topbar-button-group {
         display: flex;
         gap: 20px;
@@ -30,10 +33,10 @@
             outline-offset: 2px;
         }
         & > .focused {
-            outline: 4px solid var(--clr-primary-active);
+            outline: 8px solid var(--clr-primary-active);
         }
         & > button {
-            font-size: 24px;
+            font-size: 20px;
         }
     }
 }

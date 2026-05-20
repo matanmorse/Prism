@@ -2,18 +2,18 @@ import { Outlet } from "react-router-dom";
 import TitleBar from "../components/TitleBar";
 import { useEffect, useState } from "react";
 import { useFocusable, FocusContext } from "@noriginmedia/norigin-spatial-navigation-react";
-import { useGamepads } from 'react-gamepads';
+import { useGamepads } from 'react-ts-gamepads';
+import GamepadHandler from "../components/big_picture/GamepadHandler";
 
 const BigPictureLayout = () => {
-    const {focusKey} = useFocusable({focusKey: "BIGPICTURE_ROOT"})
-    const [gamepads, setGamepads] = useState({})
-    useGamepads(gamepads => setGamepads(gamepads))
-    console.log(gamepads);
+    const {focusKey, ref} = useFocusable({focusKey: "BIGPICTURE_ROOT"})
+
     return (
         <>
             <TitleBar />
             <FocusContext.Provider value={focusKey}>
-            <div id="root">
+            <GamepadHandler />
+            <div id="root" ref={ref}>
                 <Outlet />
             </div>
             </FocusContext.Provider>

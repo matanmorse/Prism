@@ -30,7 +30,7 @@ const BigPictureLibrary = () => {
                 <BigPictureTopbar />
                 <div className="games-carousel" ref={ref}>
                     {games.map((game,key) => (
-                        <GameCard key={game.path} game={game} size={1.75}/>
+                        <GameCard key={game.path} game={game} size={2}/>
                     ))}
                 </div>
                 <BigPictureBottombar />

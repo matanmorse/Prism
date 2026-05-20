@@ -7,6 +7,7 @@
     "react-gamepads": "^1.0.0",
     "react-router-dom": "^7.14.2",
     "react-spinners": "^0.17.0",
+    "react-ts-gamepads": "^1.0.8",
     "vite": "^7.3.1"
   }
 }
