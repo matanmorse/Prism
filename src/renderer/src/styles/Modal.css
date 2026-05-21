@@ -78,6 +78,11 @@
             background-color: var(--clr-surface-3);
             cursor: pointer;
         }
+        &.focused {
+            background-color: rgba(255,255,255,0.1);
+            transform: scale(1.015);
+            outline-color: transparent;
+        }
 
         &.selected {
             background-color: var(--clr-primary-active);
@@ -110,7 +115,7 @@
         }
     }
 
-    .remember-checkbox {
+    .checkbox-wrapper {
         display: flex;
         align-items: center;
         gap: 5px;

@@ -1,6 +1,6 @@
 import { Gamepad2 } from "lucide-react";
 import { useFocusable, FocusContext} from '@noriginmedia/norigin-spatial-navigation-react';
-import Button from "./Button";
+import FocusButton from "../focus/FocusButton";
 import { useLibrary } from "../../contexts/LibraryContext";
 
 const BigPictureTopbar = () => {
@@ -15,9 +15,9 @@ const BigPictureTopbar = () => {
                 <h1 className='header-noweight' style={{marginBottom:'.5rem'}}>Games</h1>
             </div>
             <div className={`topbar-button-group focusable ${focused ? 'focused' : ""}`} ref={ref}>
-                <Button type={libraryFilter === 'all' ? 'primary selected':'ghost'} text={"All"} large={true} onClick={() => setLibraryFilter('all')}/>
-                <Button type={libraryFilter === 'playable' ? 'primary selected':'ghost'} text={"Playable"} large={true} onClick={() => setLibraryFilter('playable')}/>
-                <Button type={libraryFilter === 'needs_config' ? 'primary selected':'ghost'} text={"Needs Configuration"} large={true} onClick={() => setLibraryFilter('needs_config')}/>
+                    <FocusButton type={libraryFilter === 'all' ? 'primary selected':'ghost'} text={"All"} large={true} onClick={() => setLibraryFilter('all')}/>
+                    <FocusButton type={libraryFilter === 'playable' ? 'primary selected':'ghost'} text={"Playable"} large={true} onClick={() => setLibraryFilter('playable')}/>
+                    <FocusButton type={libraryFilter === 'needs_config' ? 'primary selected':'ghost'} text={"Needs Configuration"} large={true} onClick={() => setLibraryFilter('needs_config')}/>
             </div>
         </div>
     </FocusContext.Provider>
