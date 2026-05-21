@@ -8,14 +8,15 @@ import '../../styles/big_picture/BigPictureLibrary.css'
 import { useBigPicture } from '../../contexts/BigPictureContext';
 import { useModal } from '../../contexts/ModalContext';
 
-import { useFocusable, FocusContext} from '@noriginmedia/norigin-spatial-navigation-react';
+import {FocusContext} from '@noriginmedia/norigin-spatial-navigation-react';
 import BigPictureBottombar from '../big_picture/BigPictureBottombar';
 import BigPictureTopbar from '../big_picture/BigPictureTopbar';
+import useFocus from '../../hooks/useFocus';
 
 
 const BigPictureLibrary = () => {
     const {games, fetchGames} = useLibrary()
-    const {ref, focusKey, focusSelf} = useFocusable({focusKey:"LIBRARY_CAROUSEL"});
+    const {ref, focusKey, focusSelf} = useFocus({focusKey:"LIBRARY_CAROUSEL"});
 
     useEffect(() => { fetchGames() }, [])
 

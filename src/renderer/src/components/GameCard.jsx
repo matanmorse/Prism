@@ -9,15 +9,15 @@ import NoEmulatorModal from '../modals/NoEmulatorModal'
 import { useLibrary } from '../contexts/LibraryContext'
 import CheckGameConfiguredEmulator, { allConfiguredEmulators } from '../utils/gameUtil.js'
 import SelectEmulatorModal from '../modals/SelectEmulatorModal.jsx'
-import { useFocusable } from '@noriginmedia/norigin-spatial-navigation-react';
+import useFocus from '../hooks/useFocus.jsx'
 
 const GameCard = ({game, size=1}) => {
     const [isLoading, setIsLoading] = useState(false)
     const [supportedEmulators, setSupportedEmulators] = useState([]);
     const [hasConfiguredEmulator, setHasConfiguredEmulator] = useState(true); /* has an exe been properly configured for an emulator that supports this? */
     const [isHover, setIsHover] = useState(false)
-    const {ref, focused} = useFocusable({
-        focusKey: game.title,
+    const {ref, focused} = useFocus({
+        focusKey: game.path,
         onFocus: () => {
             ref.current?.scrollIntoView({
                 behavior: 'smooth',
