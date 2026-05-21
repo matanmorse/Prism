@@ -16,6 +16,7 @@ const GameCard = ({game, size=1}) => {
     const [supportedEmulators, setSupportedEmulators] = useState([]);
     const [hasConfiguredEmulator, setHasConfiguredEmulator] = useState(true); /* has an exe been properly configured for an emulator that supports this? */
     const [isHover, setIsHover] = useState(false)
+
     const {ref, focused} = useFocus({
         focusKey: game.path,
         onFocus: () => {
@@ -25,12 +26,13 @@ const GameCard = ({game, size=1}) => {
                 inline: 'center',    // horizontal: center the card
             })
         },
-        onEnterPress: () => launchGame()})
+        onEnterPress: () => launchGame()}
+    )
 
     const { showModal, hideModal } = useModal();
-    const { libraryFilter, titleSearch, hasConfigToggle, fetchGames } = useLibrary();
+    const { libraryFilter, titleSearch, hasConfigToggle, fetchGames, setInGame } = useLibrary();
     const fileExtension = game.path.split('.').at(-1);
-     
+    
 
     /* Generic launch */
     const launchGame = async () => {
@@ -53,12 +55,15 @@ const GameCard = ({game, size=1}) => {
             )
             return;
         }
+
+        setInGame(true)
         setIsLoading(true);    
         try {
             await window.launchGameService.launchGame(game.path)
         }
         catch (error) {
             console.log(`[${game.title} Card] Error Launching`)
+            toggleInGame()
         }
         fetchGames()
         setIsLoading(false);
@@ -67,6 +72,7 @@ const GameCard = ({game, size=1}) => {
     /* Launch with a specific emulator */
     const launchWithEmulator = async (emulator, remember) => {
         console.log (`[${game.title} Card] Launching with ${emulator}`)
+        setInGame(true)
         setIsLoading(true)
         await window.launchGameService.launchGame(game.path, emulator, remember)
         setIsLoading(false)
@@ -79,6 +85,12 @@ const GameCard = ({game, size=1}) => {
         CheckGameConfiguredEmulator(fileExtension).then(setHasConfiguredEmulator);
         window.configService.getSupportedEmulators(fileExtension).then(setSupportedEmulators);
     }, [fileExtension, hasConfigToggle]);
+
+    useEffect(() => {
+    const handler = (data) => setInGame(false)
+    const wrapper = window.ipcRenderer.on(`${game.path}-in-game`, handler);
+    return () => window.ipcRenderer.off(`${game.path}-in-game`, wrapper);
+    }, []);
 
     if (!game 
         || (libraryFilter === 'needs_config' && hasConfiguredEmulator) 
