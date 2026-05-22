@@ -206,12 +206,11 @@ btn-primary.selected.focused {
 .btn-installing:hover {
   background: linear-gradient(to right,
       rgba(139, 92, 246, 0.4) var(--progress, 0%),
-      rgba(139, 92, 246, 0.1) var(--progress, 0%));
+      rgba(139, 92, 246, 0.1) var(--progress, 0%)) !important;
   border-color: var(--clr-primary-border);
   color: var(--clr-primary-1);
   cursor: not-allowed;
   pointer-events: none;
-  transition: --progress 0.3s ease, background 0.3s ease;
 }
 
 /* Installing - progress bar via background */
@@ -224,7 +223,6 @@ btn-primary.selected.focused {
   color: var(--clr-primary-1);
   cursor: not-allowed;
   pointer-events: none;
-  transition: --progress 0.3s ease, background 0.3s ease;
 }
 
 /* Installed - success state */

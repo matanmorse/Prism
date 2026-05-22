@@ -7,6 +7,7 @@ import { useState } from "react";
 import { useLibrary } from "../../../contexts/LibraryContext";
 import useProgress from "../../../hooks/useProgress";
 import { SpatialNavigation } from "@noriginmedia/norigin-spatial-navigation";
+import FocusProgressButton from "../../focus/FocusProgressButton";
 
 export default function BigPictureSettingsContent({selected}) {
     const {isEmulatorConfigured, refetchEmulators, emulators} = useEmulator()
@@ -81,8 +82,8 @@ export default function BigPictureSettingsContent({selected}) {
             <div className="emulator-settings-actions">
                 <label>Actions</label>
                 <div className="button-group">
-                    <FocusButton type={'primary'} large={true} onClick={DoAutoInstallation} focusKey={'AUTO_INSTALL_BUTTON'} focusOnBack={selected}><Download/> Auto-Install</FocusButton>
-                    <FocusButton type={'primary'} large={true} onClick={DoAutoScan} focusKey={'AUTO_SCAN_BUTTON'} focusOnBack={selected}><ScanSearchIcon/> Scan </FocusButton>
+                    <FocusProgressButton type={'primary'} large={true} onClick={DoAutoInstallation} focusKey={'AUTO_INSTALL_BUTTON'} focusOnBack={selected}><Download/> Auto-Install</FocusProgressButton>
+                    <FocusProgressButton type={'primary'} large={true} onClick={DoAutoScan} focusKey={'AUTO_SCAN_BUTTON'} focusOnBack={selected}><ScanSearchIcon/> Scan </FocusProgressButton>
                     <FocusButton type={'danger'} large={true} onClick={ResetEmulator} focusKey={'RESET_BUTTON'} focusOnBack={selected}><X/> Reset</FocusButton>
                 </div>
             </div>
