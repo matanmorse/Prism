@@ -44,11 +44,16 @@ body {
   height: calc(100vh - 30px);
 }
 
-.library, .sidebar {
+.library, .sidebar, .background {
   position: relative;
 }
 
-.library::before, .big-picture-library::before {
+.background {
+  height: 100%;
+  width: 100%;
+}
+
+.library::before, .big-picture-library::before, .background::before {
   content: ''; 
   position: absolute;
   inset: 0;
@@ -77,7 +82,7 @@ body {
   z-index: 0;
 }
 
-.library::after, .big-picture-library::after  {
+.library::after, .big-picture-library::after, .background::after  {
   content: '';
   position: absolute;
   inset: 0;

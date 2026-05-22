@@ -3,7 +3,7 @@ import TitleBar from "../components/TitleBar";
 import { useEffect, useState } from "react";
 import { FocusContext } from "@noriginmedia/norigin-spatial-navigation-react";
 import { useGamepads } from 'react-ts-gamepads';
-import GamepadHandler from "../components/big_picture/GamepadHandler";
+import GamepadHandler from "../components/focus/GamepadHandler";
 import useFocus from "../hooks/useFocus";
 
 const BigPictureLayout = () => {

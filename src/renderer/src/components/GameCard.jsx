@@ -10,6 +10,7 @@ import { useLibrary } from '../contexts/LibraryContext'
 import CheckGameConfiguredEmulator, { allConfiguredEmulators } from '../utils/gameUtil.js'
 import SelectEmulatorModal from '../modals/SelectEmulatorModal.jsx'
 import useFocus from '../hooks/useFocus.jsx'
+import { SpatialNavigation, updateAllLayouts } from '@noriginmedia/norigin-spatial-navigation'
 
 const GameCard = ({game, size=1}) => {
     const [isLoading, setIsLoading] = useState(false)

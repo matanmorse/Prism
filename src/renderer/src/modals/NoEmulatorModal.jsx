@@ -1,10 +1,12 @@
+import { useEffect } from "react";
 import FocusButton from "../components/focus/FocusButton";
 import { useModal } from "../contexts/ModalContext";
 import Settings from "../pages/Settings";
+import { setFocus } from "@noriginmedia/norigin-spatial-navigation";
 
 const NoEmulatorModal = ({ fileExtension }) => {
-
     const { showModal, hideModal } = useModal();
+    useEffect(() => {setFocus('NOEMULATOR_MODAL_SETTINGS')}, [])
     return (
         <div className="no-emulator-modal">
             <h2>No emulator configured</h2>
@@ -14,15 +16,16 @@ const NoEmulatorModal = ({ fileExtension }) => {
                     type={'danger'}
                     large={true}
                     onClick={hideModal}
-                    text="Cancel" />
+                    text="Cancel" 
+                    focusKey={"NOEMULATOR_MODAL_CANCEL"}
+                    />
                 <FocusButton
                     type={'primary'}
                     large={true}
                     onClick={() => {hideModal; showModal(<Settings />)}}
-                    text="Settings" />
-                <button className="btn btn-primary btn-lg" onClick={() => { hideModal(); showModal(<Settings />); }}>
-                    Go to Settings
-                </button>
+                    text="Settings" 
+                    focusKey={"NOEMULATOR_MODAL_SETTINGS"}
+                    />
             </div>
         </div>
     )

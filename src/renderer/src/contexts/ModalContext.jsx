@@ -3,7 +3,7 @@ import '../styles/Modal.css'
 import { useBigPicture } from './BigPictureContext';
 import { FocusContext, getCurrentFocusKey, setFocus } from '@noriginmedia/norigin-spatial-navigation';
 import useFocus from '../hooks/useFocus';
-
+import {useNavigate} from 'react-router-dom'
 const ModalContext = createContext(null);
 
 // Shell used to draw focus to the modal content when modals are opened
@@ -25,19 +25,18 @@ function ModalShell({ children, onClose }) {
 export function ModalProvider({ children }) {
     const [modalStack, setModalStack] = useState([]);
 
+    const navigate = useNavigate();
     const {toggle} = useBigPicture()
 
     const returnFocusKey = useRef(null) // where to return focus to when the modal is closed
 
     const showModal = (component) => {
-        console.log("SHOWING, SAVING PREVIOUS " + getCurrentFocusKey())
         returnFocusKey.current = getCurrentFocusKey();
         setFocus('MODAL')
         setModalStack(prev => [...prev, component]);
     }
 
     const hideModal = () => {
-        console.log("HIDING, RESTORING TO " + returnFocusKey.current)
         setModalStack(prev => prev.slice(0, -1));
         if (returnFocusKey.current) {
             setFocus(returnFocusKey.current)
@@ -47,7 +46,7 @@ export function ModalProvider({ children }) {
     const hideAll = () => setModalStack([]);
 
     useEffect(() => {
-        const handleKeyDown = (e) => { if (e.key === 'Escape') hideModal(); if (e.key === 'q') toggle() }
+        const handleKeyDown = (e) => { if (e.key === 'Escape') hideModal(); if (e.key === 'q'){toggle(); navigate('/')} }
         window.addEventListener('keydown', handleKeyDown);
         return () => window.removeEventListener('keydown', handleKeyDown);
     }, []);
