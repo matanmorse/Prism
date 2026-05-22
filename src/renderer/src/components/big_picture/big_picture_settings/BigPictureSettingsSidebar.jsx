@@ -10,7 +10,7 @@ const FocusEmulatorOption = ({ emulatorName, selected, setSelected }) => {
         focusKey: emulatorName,
         // TODO: Figure out how to extract and reuse this logic. Some problem with passing ref I think.
         onFocus: () => {
-            setSelected('')
+            setSelected(emulatorName)
             ref.current.scrollIntoView({
                 behavior: 'smooth',
                 block: 'nearest'
@@ -22,6 +22,7 @@ const FocusEmulatorOption = ({ emulatorName, selected, setSelected }) => {
         onEnterPress: () => { setSelected(emulatorName); navigateByDirection('right') },
     })
 
+    const { isEmulatorConfigured } = useEmulator();
     const navigate = useNavigate()
 
     useEffect(() => {
@@ -34,18 +35,24 @@ const FocusEmulatorOption = ({ emulatorName, selected, setSelected }) => {
     }, []);
 
     return (
-        <div className={`emulator-option focusable ${focused ? 'focused' : ''} ${selected === emulatorName ? 'selected' : ''}`} ref={ref}>
+        <div className={`emulator-option focusable 
+            ${focused ? 'focused' : ''} 
+            ${selected === emulatorName ? 'selected' : ''} 
+            ${isEmulatorConfigured(emulatorName) ? 'configured' : 'unconfigured'}`}
+            ref={ref}>
+
             <EmulatorNameAndIcon emulatorName={emulatorName} size={5} />
         </div>
     )
 }
 
-export default function BigPictureSettingsSidebar() {
+export default function BigPictureSettingsSidebar({ selected, setSelected }) {
     const { emulators } = useEmulator()
     const { focusKey, ref } = useFocus({ focusKey: "EMULATOR_SETTINGS_SIDEBAR" })
-    const firstEmulatorName = emulators.sort((a, b) => a.prettyName.localeCompare(b.prettyName))[0]?.name;
-    const [selected, setSelected] = useState('')
-    useEffect(() => { setFocus(firstEmulatorName) }, [emulators])
+    const firstEmulatorName = emulators?.sort((a, b) => a.prettyName.localeCompare(b.prettyName))[0]?.name;
+    const [firstMount, setFirstMounted] = useState(true);
+
+    useEffect(() => { if(firstMount && firstEmulatorName) {setFocus(firstEmulatorName); setFirstMounted(false)}}, [emulators])
 
     return (
         <FocusContext.Provider value={focusKey}>

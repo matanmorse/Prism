@@ -15,9 +15,9 @@ const BigPictureTopbar = () => {
                 <h1 className='header-noweight' style={{marginBottom:'.5rem'}}>Games</h1>
             </div>
             <div className={`topbar-button-group focusable ${focused ? 'focused' : ""}`} ref={ref}>
-                    <FocusButton type={libraryFilter === 'all' ? 'primary selected':'ghost'} text={"All"} large={true} onClick={() => setLibraryFilter('all')}/>
-                    <FocusButton type={libraryFilter === 'playable' ? 'primary selected':'ghost'} text={"Playable"} large={true} onClick={() => setLibraryFilter('playable')}/>
-                    <FocusButton type={libraryFilter === 'needs_config' ? 'primary selected':'ghost'} text={"Needs Configuration"} large={true} onClick={() => setLibraryFilter('needs_config')}/>
+                    <FocusButton type={libraryFilter === 'all' ? 'primary selected':'ghost'} large={true} onClick={() => setLibraryFilter('all')}>All</FocusButton>
+                    <FocusButton type={libraryFilter === 'playable' ? 'primary selected':'ghost'} large={true} onClick={() => setLibraryFilter('playable')}> Playable </FocusButton>
+                    <FocusButton type={libraryFilter === 'needs_config' ? 'primary selected':'ghost'} large={true} onClick={() => setLibraryFilter('needs_config')}>Needs Configuration</FocusButton>
             </div>
         </div>
     </FocusContext.Provider>
