@@ -1,6 +1,7 @@
 .big-picture-settings {
     --clr-outline: var(--clr-border);
-
+    max-height: 100vh;
+    overflow-y: auto;
     height: 100%;
     width: 100%;
     min-width: 100vw;
@@ -20,6 +21,7 @@
         gap: 16px;
 
         h1 {
+            font-weight: normal;
             margin-bottom: 0.4rem;
         }
     }
@@ -108,6 +110,7 @@
 .settings-content {
     flex: 1;
     padding: 32px;
+    color: var(--clr-text-secondary);
 
     .label-wrapper {
         padding: 0rem;
@@ -118,10 +121,12 @@
         align-items: center;
         gap: 24px;
         margin-bottom: 16px;
+
         .emulator-info {
             display: flex;
             flex-direction: column;
             gap: 4px;
+
             .emulator-systems {
                 margin: 0rem !important;
                 color: var(--clr-text-secondary);
@@ -136,23 +141,7 @@
         }
     }
 
-    .emulator-exe {
-        margin: 16px 0px;
-
-        .exe-path-wrapper {
-            display: flex;
-            gap: 16px;
-        }
-
-        .exe-path {
-            background-color: rgba(0,0,0,0.5);
-            padding: 8px;
-            border: 1px solid var(--clr-border);
-            border-radius: 4px;
-            font-family: monospace;
-            width: 50vw;
-        }
-    }
+    
 
     .emulator-settings-actions {
         .button-group {
@@ -160,5 +149,97 @@
             justify-content: start;
             gap: 30px;
         }
+    }
+
+    .games-table-topbar {
+        margin-top: 16px;
+    }
+
+}
+
+.library-settings-content {
+    padding-bottom: 16px;
+
+    .library-settings-actions {
+        margin-bottom: 16px;
+        font-size: 24px;
+
+        .button-group {
+            justify-content: start;
+            gap: 30px;
+        }
+    }
+
+    label {
+        display: inline-block;
+        font-size: 24px;
+        margin-top: 16px;
+        margin-bottom: 16px;
+    }
+
+    .games-label {
+        margin-bottom: 0px;
+    }
+}
+
+.game-info-row {
+    display: flex;
+    margin: 8px 0px;
+    gap: 16px;
+    scroll-margin-top: 40vh;
+    scroll-margin-bottom: 132px;
+    padding: 8px;
+    outline-offset: 0px;
+    border: 4px solid transparent;
+    margin: 1px 0px;
+    outline: none !important;
+
+    p {
+        margin: 0rem;
+    }
+
+    /* Need to overwrite styles since .game-info is also used for the cards */
+    .game-info {
+        position: static;
+        transform: none;
+        width: 100%;
+        justify-content: start;
+        flex-direction: column;
+        display: flex;
+        justify-content: space-around;
+
+        .game-title {
+            font-size: 24px;
+        }
+    }
+
+    .img-wrapper,
+    .img-wrapper img {
+        height: 80px;
+        width: 80px;
+    }
+
+    &.focused {
+        transform: scale(1);
+        background-color: rgba(255, 255, 255, 0.15);
+        border-color: var(--clr-primary-active);
+    }
+}
+
+.emulator-exe {
+    margin: 16px 0px;
+
+    .exe-path-wrapper {
+        display: flex;
+        gap: 16px;
+    }
+
+    .exe-path {
+        background-color: rgba(0, 0, 0, 0.5);
+        padding: 8px;
+        border: 1px solid var(--clr-border);
+        border-radius: 4px;
+        font-family: monospace;
+        width: 50vw;
     }
 }

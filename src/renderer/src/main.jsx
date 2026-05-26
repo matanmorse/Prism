@@ -14,6 +14,7 @@ import { LibraryProvider } from './contexts/LibraryContext.jsx'
 import { BigPictureProvider } from './contexts/BigPictureContext.jsx'
 import { init } from '@noriginmedia/norigin-spatial-navigation-core';
 import BigPictureEmulatorSettings from './pages/BigPictureEmulatorSettings.jsx'
+import BigPictureLibrarySettings from './pages/BigPictureLibrarySettings.jsx'
 
 const Router = import.meta.env.DEV ? BrowserRouter : HashRouter
 
@@ -33,6 +34,7 @@ createRoot(document.getElementById('main')).render(
             <Route path="/" element={<Layout />}>
               <Route index element={<App />} />
               <Route path='/emulator_settings' element={<BigPictureEmulatorSettings />} />
+              <Route path='/library_settings' element={<BigPictureLibrarySettings />} />
             </Route>
           </Routes>
         </ModalProvider>

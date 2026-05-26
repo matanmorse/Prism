@@ -17,7 +17,7 @@ const BigPictureBottombar = () => {
         <FocusContext.Provider value={focusKey}>
             <div className={`big-picture-library-bottombar focusable ${focused ? 'focused' : ''}`} ref={ref}>
                 <FocusButton icon={<PrismIcon size={3.8} />} />
-                <FocusButton icon={<LibraryBigIcon style={{ 'color': '#e85c4c' }} size={60} />} />
+                <FocusButton icon={<LibraryBigIcon size={60} />} onClick={() => navigate('/library_settings')} />
                 <FocusButton icon={<Gamepad2 size={60} />} onClick={() => navigate('/emulator_settings')} />
                 <FocusButton icon={<UserCircle2 size={60} />} />
                 <FocusButton onClick={() => showModal(<Settings />)} icon={<SettingsIcon size={60} />} />

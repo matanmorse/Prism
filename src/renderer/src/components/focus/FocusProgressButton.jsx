@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import useProgress from "../../hooks/useProgress";
 import useFocus from "../../hooks/useFocus";
-import { getCurrentFocusKey, SpatialNavigation } from "@noriginmedia/norigin-spatial-navigation";
+import { getCurrentFocusKey, setFocus, SpatialNavigation } from "@noriginmedia/norigin-spatial-navigation";
 
 export default function FocusProgressButton ({type, onClick, duration=3000, disabled=false, large=false, focusOnBack, focusKey, children}) {
     const [isProgressing, setIsProgressing] = useState(false);
@@ -19,7 +19,6 @@ export default function FocusProgressButton ({type, onClick, duration=3000, disa
 
     useEffect(() => {
         const handleKeyDown = (e) => {
-            console.log(focusOnBack)
             if (getCurrentFocusKey() === focusKey && e.key === 'Escape' && focusOnBack) setFocus(focusOnBack)
         }
         window.addEventListener('keydown', handleKeyDown);

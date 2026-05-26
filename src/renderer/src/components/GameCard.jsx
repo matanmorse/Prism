@@ -63,8 +63,8 @@ const GameCard = ({game, size=1}) => {
             await window.launchGameService.launchGame(game.path)
         }
         catch (error) {
+            setInGame(false)
             console.log(`[${game.title} Card] Error Launching`)
-            toggleInGame()
         }
         fetchGames()
         setIsLoading(false);

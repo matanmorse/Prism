@@ -390,7 +390,7 @@ button:focus-visible {
   color: var(--clr-text-primary);
   background: var(--clr-surface-1);
   border: 1px solid var(--clr-border);
-  margin-bottom: 1rem;
+  margin-bottom: 16px;
 }
 
 .table thead tr {
@@ -530,6 +530,19 @@ input[type="checkbox"]:disabled {
   cursor: not-allowed;
 }
 
+hr {
+  border: none;
+  height: 1px;
+  background: var(--clr-border);
+  margin: 16px 0px;
+}
+
+label {
+  color: var(--clr-text-secondary);
+  margin-bottom: 8px;
+  display: inline-block;
+}
+
 .button-group {
   display: flex;
   gap: 10px;
@@ -558,6 +571,10 @@ input[type="checkbox"]:disabled {
 
 .header-noweight {
   font-weight: normal;
+}
+
+.hidden {
+  visibility: hidden;
 }
 
 * {

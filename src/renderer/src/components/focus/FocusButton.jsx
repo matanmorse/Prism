@@ -7,7 +7,6 @@ const FocusButton = ({type, size=1, text="", icon=undefined, focusKey, className
     
     useEffect(() => {
         const handleKeyDown = (e) => {
-            console.log(focusOnBack)
             if (getCurrentFocusKey() === focusKey && e.key === 'Escape' && focusOnBack) setFocus(focusOnBack)
         }
         window.addEventListener('keydown', handleKeyDown);

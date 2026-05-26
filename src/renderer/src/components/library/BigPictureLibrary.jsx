@@ -23,7 +23,7 @@ const BigPictureLibrary = () => {
         focusKey: "LIBRARY_CAROUSEL",
     });
 
-    useEffect(() => { fetchGames() }, [])
+    useEffect(() => { fetchGames(); focusSelf() }, [])
 
     useEffect(() => {
         if (games.length > 0) focusSelf();

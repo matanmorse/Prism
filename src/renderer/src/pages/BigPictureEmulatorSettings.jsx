@@ -2,7 +2,7 @@ import '../styles/big_picture/BigPictureSettings.css'
 import BigPictureSettingsSidebar from "../components/big_picture/big_picture_settings/BigPictureSettingsSidebar";
 import FocusButton from "../components/focus/FocusButton"
 
-import { Settings } from 'lucide-react'
+import { Gamepad2, Settings } from 'lucide-react'
 import { FocusContext } from '@noriginmedia/norigin-spatial-navigation';
 import useFocus from '../hooks/useFocus';
 import { useState } from 'react';
@@ -18,7 +18,7 @@ export default function BigPictureEmulatorSettings() {
             <div className="background">
                 <div className="big-picture-settings" ref={ref}>
                     <div className="settings-title">
-                        <Settings size={35} />
+                        <Gamepad2 size={35} />
                         <h1>Emulator Settings</h1>
                     </div>
                     <hr />

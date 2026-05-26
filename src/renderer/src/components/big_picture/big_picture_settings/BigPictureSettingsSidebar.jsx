@@ -8,7 +8,6 @@ import { useNavigate } from "react-router-dom"
 const FocusEmulatorOption = ({ emulatorName, selected, setSelected }) => {
     const { focusKey, focused, ref } = useFocus({
         focusKey: emulatorName,
-        // TODO: Figure out how to extract and reuse this logic. Some problem with passing ref I think.
         onFocus: () => {
             setSelected(emulatorName)
             ref.current.scrollIntoView({

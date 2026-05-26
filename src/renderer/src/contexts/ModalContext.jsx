@@ -30,6 +30,8 @@ export function ModalProvider({ children }) {
 
     const returnFocusKey = useRef(null) // where to return focus to when the modal is closed
 
+    const hasModal = modalStack.length > 0
+
     const showModal = (component) => {
         returnFocusKey.current = getCurrentFocusKey();
         setFocus('MODAL')
@@ -46,13 +48,18 @@ export function ModalProvider({ children }) {
     const hideAll = () => setModalStack([]);
 
     useEffect(() => {
-        const handleKeyDown = (e) => { if (e.key === 'Escape') hideModal(); if (e.key === 'q'){toggle(); navigate('/')} }
+        const handleKeyDown = (e) => { if (e.key === 'Escape' && hasModal) {
+            e.stopImmediatePropagation();
+            hideModal()
+        } 
+            if (e.key === 'q'){toggle(); navigate('/')} 
+        }
         window.addEventListener('keydown', handleKeyDown);
         return () => window.removeEventListener('keydown', handleKeyDown);
-    }, []);
+    }, [modalStack]);
 
     return (
-        <ModalContext.Provider value={{ showModal, hideModal, hideAll }}>
+        <ModalContext.Provider value={{ showModal, hideModal, hideAll, hasModal }}>
                 {children}
                 {modalStack.map((modal, i) => (
                     <div key={i} className="modal-overlay" style={{ zIndex: 1000 + i }} onClick={hideModal}>

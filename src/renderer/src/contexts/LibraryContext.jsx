@@ -21,7 +21,6 @@ export function LibraryProvider({ children }) {
 
     // Pause spatial navigation when game is launched, resume when closed
     useEffect(() => {
-        console.log("[Library Context] Setting In Game: " + inGame)
         if (inGame) SpatialNavigation.pause()
         else SpatialNavigation.resume()
     }, [inGame])

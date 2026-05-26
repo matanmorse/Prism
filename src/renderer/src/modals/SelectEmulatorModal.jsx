@@ -13,12 +13,11 @@ const EmulatorSelectOption = ({ name, setSelected, selected, isConfigured }) => 
     const { focusKey, focused, ref } = useFocus({ focusKey: name, focusable: isConfigured(name), onEnterPress: () => setSelected(name) })
 
     return (
-        <div ref={ref}>
-            <div className={`emulator-option-wrapper ${selected === name && 'selected'} focusable ${focused ? 'focused' : ''} ${!isConfigured(name) && 'disabled'}`}
-                onClick={() => setSelected(name)}>
-                <EmulatorNameAndIcon emulatorName={name} size={4} />
-                {!isConfigured(name) && <p className='text-danger'>Not Configured</p>}
-            </div>
+        <div ref={ref} className={`emulator-option-wrapper ${selected === name && 'selected'} focusable ${focused ? 'focused' : ''} ${!isConfigured(name) && 'disabled'}`}
+            onClick={() => setSelected(name)}
+            >
+            <EmulatorNameAndIcon emulatorName={name} size={4} vertical={true} />
+            {!isConfigured(name) ? <span className="pill pill-danger">Not Configured</span> : <span className="pill pill-success ">Configured</span>}
         </div>
     )
 }
@@ -48,7 +47,7 @@ const SelectEmulatorModal = ({ romPath, onConfirm, doLaunch = false }) => {
     if (loading) return;
     return (
         <div className="select-emulator-modal">
-            <div className="modal-header">
+            <div className="select-modal-header">
                 <h2 className="header-noweight modal-title">Select emulator to launch <span className="text-primary">{game.title}</span>:</h2>
                 <p className="text-info" style={{ margin: '0rem' }}>Multiple emulators can launch this file type (.{game.fileExtension}).</p>
             </div>
@@ -71,7 +70,7 @@ const SelectEmulatorModal = ({ romPath, onConfirm, doLaunch = false }) => {
                     focusable={!(selected === '')}
                     disabled={selected === ''} type={'success'}
                     text={doLaunch ? "Launch" : "Save"}
-                    onClick={() => onConfirm(selected, remember.current.checked)}
+                    onClick={() => onConfirm(selected, remember.current?.checked)}
                     focusKey={'LAUNCH_BUTTON'} />
             </div>
         </div>
