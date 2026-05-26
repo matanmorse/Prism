@@ -23,6 +23,7 @@ const AutoInstallAndConfigure = (async (emulatorName) => {
     }
     const downloadPath = emulator.installLinks.windows
 
+    console.log('Downloading ' + emulatorName)
     // Download
     const installDir = path.join(EMULATORS_DIR, emulatorName);
     await fs.mkdir(installDir, {recursive: true });

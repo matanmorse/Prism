@@ -1,0 +1,245 @@
+.big-picture-settings {
+    --clr-outline: var(--clr-border);
+    max-height: 100vh;
+    overflow-y: auto;
+    height: 100%;
+    width: 100%;
+    min-width: 100vw;
+    padding: 2rem 4rem 2rem 4rem;
+
+    .sidebar-content-wrapper {
+        display: flex;
+        height: calc(100% - 4rem);
+        border-bottom: 1px solid var(--clr-outline);
+    }
+
+    .settings-title {
+        width: 100%;
+        color: var(--clr-text-primary);
+        display: flex;
+        align-items: center;
+        gap: 16px;
+
+        h1 {
+            font-weight: normal;
+            margin-bottom: 0.4rem;
+        }
+    }
+
+    .big-picture-sidebar-padding {
+        padding: 0px 32px 0px 0px;
+    }
+
+    hr {
+        border-width: 1px;
+        border-color: var(--clr-outline);
+        margin: 0rem;
+    }
+}
+
+.big-picture-sidebar {
+    padding-top: 32px;
+    padding-bottom: 16px;
+    min-width: 300px;
+    height: 100%;
+    border-right: 1px solid var(--clr-outline);
+
+    .emulator-options-list {
+        display: flex;
+        flex-direction: column;
+        gap: 0px;
+        overflow-y: auto;
+        height: 100%;
+
+        .focusable {
+            .label-wrapper {
+                border-left: 8px solid transparent;
+            }
+
+            padding: 8px;
+            box-sizing: content-box;
+            margin: 8px;
+            border-radius: 1px;
+            margin-right: 16px;
+        }
+
+        .focused {
+            .label-wrapper {
+                border-color: var(--clr-primary-border);
+
+                p {
+                    color: rgba(255, 255, 255, 0.8);
+                }
+            }
+
+            transform: scale(1);
+            background-color: var(--clr-surface-3);
+            outline-offset: 0px;
+        }
+
+        .selected .label-wrapper {
+            border-color: var(--clr-primary-border);
+        }
+
+        .emulator-option {
+            scroll-margin-bottom: 80px;
+            scroll-margin-top: 80px;
+            position: relative;
+
+            &::before {
+                content: '';
+                border: 5px solid transparent;
+                position: absolute;
+                border-radius: 50%;
+                right: 16px;
+                top: 50%;
+                transform: translateY(-50%)
+            }
+
+            &.configured::before {
+                border-color: var(--pill-text-success);
+            }
+
+            &.unconfigured::before {
+                border-color: var(--pill-text-danger);
+            }
+        }
+    }
+}
+
+.settings-content {
+    flex: 1;
+    padding: 32px;
+    color: var(--clr-text-secondary);
+
+    .label-wrapper {
+        padding: 0rem;
+    }
+
+    .settings-header {
+        display: flex;
+        align-items: center;
+        gap: 24px;
+        margin-bottom: 16px;
+
+        .emulator-info {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+
+            .emulator-systems {
+                margin: 0rem !important;
+                color: var(--clr-text-secondary);
+                margin-bottom: 4px;
+                transform: translateY(-6px)
+            }
+        }
+
+        .icon-wrapper {
+            height: fit-content;
+            border-radius: 8px
+        }
+    }
+
+    
+
+    .emulator-settings-actions {
+        .button-group {
+            margin-top: 8px;
+            justify-content: start;
+            gap: 30px;
+        }
+    }
+
+    .games-table-topbar {
+        margin-top: 16px;
+    }
+
+}
+
+.library-settings-content {
+    padding-bottom: 16px;
+
+    .library-settings-actions {
+        margin-bottom: 16px;
+        font-size: 24px;
+
+        .button-group {
+            justify-content: start;
+            gap: 30px;
+        }
+    }
+
+    label {
+        display: inline-block;
+        font-size: 24px;
+        margin-top: 16px;
+        margin-bottom: 16px;
+    }
+
+    .games-label {
+        margin-bottom: 0px;
+    }
+}
+
+.game-info-row {
+    display: flex;
+    margin: 8px 0px;
+    gap: 16px;
+    scroll-margin-top: 40vh;
+    scroll-margin-bottom: 132px;
+    padding: 8px;
+    outline-offset: 0px;
+    border: 4px solid transparent;
+    margin: 1px 0px;
+    outline: none !important;
+
+    p {
+        margin: 0rem;
+    }
+
+    /* Need to overwrite styles since .game-info is also used for the cards */
+    .game-info {
+        position: static;
+        transform: none;
+        width: 100%;
+        justify-content: start;
+        flex-direction: column;
+        display: flex;
+        justify-content: space-around;
+
+        .game-title {
+            font-size: 24px;
+        }
+    }
+
+    .img-wrapper,
+    .img-wrapper img {
+        height: 80px;
+        width: 80px;
+    }
+
+    &.focused {
+        transform: scale(1);
+        background-color: rgba(255, 255, 255, 0.15);
+        border-color: var(--clr-primary-active);
+    }
+}
+
+.emulator-exe {
+    margin: 16px 0px;
+
+    .exe-path-wrapper {
+        display: flex;
+        gap: 16px;
+    }
+
+    .exe-path {
+        background-color: rgba(0, 0, 0, 0.5);
+        padding: 8px;
+        border: 1px solid var(--clr-border);
+        border-radius: 4px;
+        font-family: monospace;
+        width: 50vw;
+    }
+}

@@ -1,7 +1,6 @@
 import '../../styles/EmulatorIconList.css';
 const EmulatorIconList = ({emulatorNameList}) => {
     const logos = import.meta.glob('../../../static/icons/*.svg', { eager: true });
-
     return (
         <div className="emulator-icon-list">
             {emulatorNameList.map((emulatorName) => (

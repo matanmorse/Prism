@@ -1,3 +1,4 @@
+import { SpatialNavigation } from '@noriginmedia/norigin-spatial-navigation';
 import { createContext, useContext, useEffect, useState } from 'react';
 
 const LibraryContext = createContext(null);
@@ -8,13 +9,21 @@ export function LibraryProvider({ children }) {
     const [systemFilters, setSystemFilters] = useState([])
     const [games, setGames] = useState([])
     const [hasConfigToggle, setHasConfigToggle] = useState(false);
+    const [inGame, setInGame] = useState(false);
+
 
     /* Get games via IPC */
     const fetchGames = async () => {
         const res = await window.fileService.getGames();
-        console.table(res)
+        // console.table(res)
         setGames(res)
     }
+
+    // Pause spatial navigation when game is launched, resume when closed
+    useEffect(() => {
+        if (inGame) SpatialNavigation.pause()
+        else SpatialNavigation.resume()
+    }, [inGame])
 
     return (
         <LibraryContext.Provider value={{libraryFilter, setLibraryFilter, 
@@ -23,6 +32,7 @@ export function LibraryProvider({ children }) {
         titleSearch, setTitleSearch, 
         fetchGames,
         hasConfigToggle, setHasConfigToggle,
+        inGame, setInGame
         }}>
             {children}
         </LibraryContext.Provider>

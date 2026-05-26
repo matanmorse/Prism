@@ -1,10 +1,13 @@
 {
   "dependencies": {
+    "@noriginmedia/norigin-spatial-navigation": "^3.1.0",
     "@vitejs/plugin-react": "^5.0.1",
     "lucide-react": "^1.9.0",
     "react": "^19.2.5",
+    "react-gamepads": "^1.0.0",
     "react-router-dom": "^7.14.2",
     "react-spinners": "^0.17.0",
+    "react-ts-gamepads": "^1.0.8",
     "vite": "^7.3.1"
   }
 }

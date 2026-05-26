@@ -18,7 +18,7 @@ const SettingsWindow = ({submenu, ResetEmulator, SetEmulator, SetRomFolder, Rese
         if (!emulators.find(x=>x.name===emulatorName)) return undefined;
         return emulators.find(x=>x.name===emulatorName).exePath
     }
-
+    
     const RomFolderPath = () => {
         if (!emulators.find(x=>x.name==='Rom Folder')) return undefined;
         return emulators.find(x=>x.name==='Rom Folder').folderPath

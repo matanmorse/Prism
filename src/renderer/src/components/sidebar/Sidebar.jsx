@@ -7,11 +7,14 @@ import { useModal } from "../../contexts/ModalContext";
 import DebugModal from "../../modals/DebugModal";
 import Settings from "../../pages/Settings";
 import { useLibrary } from "../../contexts/LibraryContext";
+import { useBigPicture } from "../../contexts/BigPictureContext";
 
 const Sidebar = () => {
+    const { systemFilters, setSystemFilters } = useLibrary();
+    const { toggle } = useBigPicture();
+
     const [selectedOption, setSelectedOption] = useState('all_games')
     const {showModal} = useModal();
-    const { systemFilters, setSystemFilters } = useLibrary();
     const addSystemFilter = (system) => setSystemFilters([...new Set([...systemFilters, system])])
     const removeSystemFilter = (system) => {
         if (!systemFilters.includes(system)) return;
@@ -52,6 +55,10 @@ const Sidebar = () => {
          </div>
         <div className="sidebar-bottom">
             <hr/>
+            <div className="option-icon-group settings" onClick={() => toggle()}>
+                <i className="bi bi-tv" />
+                <h6 className="settings-title">Big Picture</h6>
+            </div>
             <div className="option-icon-group settings" onClick={() => showModal(<Settings />)}>
                 <i className="bi bi-gear" />
                 <h6 className="settings-title">Settings</h6>

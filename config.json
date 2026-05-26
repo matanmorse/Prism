@@ -3,6 +3,7 @@
         {
             "name": "Citra",
             "prettyName": "Citra",
+            "systemNames": ["3DS"],
             "fileFormats": ["3ds", "cci", "cia", "3dsx"],
             "installLinks": {
                 "windows": "https://archive.org/download/citra-emu_202403/citra-windows-msvc-20240303-0ff3440_nightly.zip"
@@ -13,6 +14,7 @@
         {
             "name": "MelonDS",
             "prettyName": "MelonDS",
+            "systemNames": ["DS"],
             "fileFormats": ["nds"],
             "installLinks": {
                 "windows": "https://melonds.kuribo64.net/downloads/melonDS-1.1-windows-x86_64.zip"
@@ -23,6 +25,7 @@
         {
             "name": "Dolphin",
             "prettyName": "Dolphin",
+            "systemNames": ["Wii"],
             "fileFormats": ["iso", "rvz", "gcz", "gcm", "wia", "ciso", "dol", "wbfs", "rvz", "iso", "wia", "wad", "dol"],
             "installLinks": {
                 "windows": "https://dl.dolphin-emu.org/releases/2603a/dolphin-2603a-x64.7z"
@@ -37,6 +40,7 @@
         {
             "name": "RPCS3",
             "prettyName": "RPCS3",
+            "systemNames": ["Playstation 3"],
             "fileFormats": [],
             "installLinks": {
                 "windows": "https://github.com/RPCS3/rpcs3-binaries-win/releases/download/build-e26c80c12908c95301fc7088f778cd499a6fe1ef/rpcs3-v0.0.40-19240-e26c80c1_win64_msvc.7z"
@@ -46,6 +50,7 @@
         {
             "name": "PPSSPP",
             "prettyName": "PPSSPP",
+            "systemNames": ["PSP"],
             "fileFormats": ["iso", "chd", "pbp", "prx"],
             "installLinks": {
                 "windows": "https://github.com/hrydgard/ppsspp/releases/download/v1.20.3/PPSSPP-v1.20.3-Windows-x64.zip"
@@ -55,12 +60,14 @@
         {
             "name":"Cemu",
             "prettyName": "Cemu",
+            "systemNames": ["Wii U"],
             "fileFormats": ["wua", "wux", "wud", "rpx"],
             "finalExeName": "Cemu.exe"
         },
         {
             "name": "Ares",
             "prettyName": "Ares",
+            "systemNames": ["NES", "SNES", "N64", "GameBoy", "GBA", "Arcade"],
             "fileFormats": ["cue", "chd", "mmi", "n64", "v64", "z64", "ndd", "sfc", "smc", "nes", "fds", "gb", "nbc", "gba", "smd", "gen", "a26"],
             "installLinks": {
                 "windows": "https://github.com/ares-emulator/ares/releases/download/v147/ares-windows-x64.zip"
@@ -72,6 +79,7 @@
             "name": "Citron",
             "prettyName": "Citron",
             "fileFormats": ["xci", "nsp", "nro"],
+            "systemNames": ["Nintendo Switch"],
             "installLinks": {
                 "windows": "https://github.com/citron-neo/CI/releases/download/nightly-windows/Citron-windows-nightly-9173bdfb2-x64-msvc.zip"
             },
@@ -81,6 +89,7 @@
             "name": "PCSX2",
             "prettyName": "PCSX2",
             "fileFormats": ["iso", "chd", "zso"],
+            "systemNames": ["PlayStation 2"],
             "installLinks": {
                 "windows": "https://github.com/PCSX2/pcsx2/releases/download/v2.6.3/pcsx2-v2.6.3-windows-x64-Qt.7z"
             },
@@ -90,6 +99,7 @@
             "name": "DuckStation",
             "prettyName": "DuckStation",
             "fileFormats": ["chd", "iso", "m3u", "pbp", "ecm", "mds", "mdf"],
+            "systemNames": ["PlayStation 1"],
             "installLinks": {
                 "windows": "https://github.com/stenzek/duckstation/releases/download/latest/duckstation-windows-x64-release.zip" 
             },
@@ -99,6 +109,7 @@
             "name": "Snes9x",
             "prettyName": "Snes9x",
             "fileFormats": ["smc", "sfc", "fig", "swc", "gd3"],
+            "systemNames": ["SNES"],
             "installLinks": {
                 "windows": "https://dl.emulator-zone.com/download.php/emulators/snes/snes9x/snes9x-1.62.3-win32-x64.zip"
             },
@@ -109,6 +120,7 @@
             "name": "Mesen",
             "prettyName": "Mesen",
             "fileFormats": ["nes", "fds"],
+            "systemNames": ["NES", "SNES", "GameBoy", "GBA", "Master System", "WonderSwan"],
             "installLinks": {
                 "windows": "https://github.com/SourMesen/Mesen2/releases/download/2.1.1/Mesen_2.1.1_Windows.zip"
             },
