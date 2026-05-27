@@ -1,6 +1,6 @@
 {
   "name": "prism",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "main": "src/main.js",
   "authors": "Matan Morse",
   "description": "A launcher for video game emulators.",
