@@ -12,6 +12,8 @@ const GamesTable = () => {
     const headerCheckbox = useRef();
     
     const [selectedIds, setSelectedIds] = useState(new Set());
+
+    useState(() => {fetchGames()}, [])
     const toggleSelected = (id) => {
         setSelectedIds(prev => {
             const next = new Set(prev);

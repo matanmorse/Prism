@@ -10,13 +10,18 @@ export function EmulatorProvider({ children }) {
         setEmulators(emulatorsData);
     }
 
+    const isEmulatorConfigured = (emulatorName) => {
+        if (!emulators.find(x => x.name === emulatorName)) return undefined;
+        return Boolean(emulators.find(x => x.name === emulatorName).exePath)
+    }
+
     // fetch on mount
     useEffect(() => {
         window.configService.getEmulatorsConfig().then(setEmulators);
     }, [])
 
     return (
-        <EmulatorContext.Provider value={{ emulators, refetchEmulators }}>
+        <EmulatorContext.Provider value={{ emulators, refetchEmulators, isEmulatorConfigured }}>
             {children}
         </EmulatorContext.Provider>
     );

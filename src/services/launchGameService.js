@@ -1,6 +1,7 @@
 import {spawn} from 'child_process'
 import config, {getEmulatorPath, getPreferredEmulator, getRomFolderPath, hasEmulator, setPreferredEmulator} from './configService.js'
 import { get } from 'http'
+import { getWin } from '../main.js'
 
 /* Launches a game given ROM path (emulator is inferred from supported file types in the emulators config */
 const launchGame = async (romPath, emulator, remember) => {
@@ -33,6 +34,7 @@ const launchGame = async (romPath, emulator, remember) => {
 
         game.addListener('close', () => {
             console.log(`[From ${emulator}] Game closed`)
+            getWin().webContents.send(`${romPath}-in-game`, false)
         })
 
         game.on('spawn', () => {

@@ -55,3 +55,13 @@ contextBridge.exposeInMainWorld('debugService', {
   clearCache: (key) => invoke('clear-cache', key),
   clearRoms: () => invoke('clear-roms')
 })
+
+contextBridge.exposeInMainWorld('ipcRenderer', {
+  on: (channel, callback) => {
+    const wrapper = (event, ...args) => callback(...args);
+    ipcRenderer.on(channel, wrapper);
+    return wrapper; // return so the caller can remove it
+  },
+  off: (channel, wrapper) => ipcRenderer.off(channel, wrapper),
+  invoke: (channel, ...args) => ipcRenderer.invoke(channel, ...args),
+});

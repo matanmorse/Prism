@@ -10,12 +10,12 @@
 }
 
 /* Specific styling for error modals to fit stack */
-.modal-content:has(.error-modal){
+.modal-content:has(.error-modal) {
     max-width: 1250px;
 }
 
 /* Specific styling for error modals to fit stack */
-.modal-content:has(.settings-modal){
+.modal-content:has(.settings-modal) {
     padding: 0rem;
 }
 
@@ -29,13 +29,15 @@
 }
 
 
-.no-emulator-modal h2, .error-modal h2 {
+.no-emulator-modal h2,
+.error-modal h2 {
     margin: 0 0 0.5rem;
     font-size: 1.2rem;
     color: #fff;
 }
 
-.no-emulator-modal p, .error-modal p {
+.no-emulator-modal p,
+.error-modal p {
     color: #8f98a0;
     margin: 0 0 1.5rem;
     line-height: 1.5;
@@ -48,11 +50,44 @@
 }
 
 .select-emulator-modal {
+    width: 50vw;
+
+    .select-modal-header {
+        flex-direction: column;
+        margin-bottom: 16px;
+
+    }
+
+    .emulator-option-wrapper {
+        background-color: var(--clr-surface-2);
+
+        &.focused {
+            background-color: var(--clr-surface-3) ;
+        }
+    }
+    .emulator-option-wrapper.disabled {
+        background-color: var(--clr-surface-1);
+    }
+
     .emulator-options {
         display: flex;
-        flex-direction: column;
-        gap: 5px;
+        flex-direction: row;
+        gap: 8px;
+        justify-content: center;
     }
+
+    .button-group {
+        > div {
+            display: flex;
+            gap: 28px;
+        }
+        justify-content: space-between;
+    }
+
+    .header-right {
+        width: 100%;
+    }
+
     .modal-bottom {
         margin-top: .75rem;
         display: flex;
@@ -66,59 +101,91 @@
             gap: 5px;
         }
     }
+
+    .title-wrapper {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
     .emulator-option-wrapper {
-        background-color: var(--clr-surface-2);
+        flex: 1;
         border: 1px solid transparent;
         display: flex;
-        flex-direction: row;
+        flex-direction: column;
         justify-content: space-between;
         align-items: center;
+        padding: 12px;
+        width: 25%;
+        max-width: 200px;
+        border: 1px solid var(--clr-border);
+        border-radius: 8px;
+        outline-width: 4px !important;
+        outline-offset: 0px;
+
+        .emulator-title {
+            font-size: medium !important;
+        }
 
         &:hover {
             background-color: var(--clr-surface-3);
             cursor: pointer;
         }
 
+        &.focused {
+            background-color: rgba(255, 255, 255, 0.1);
+            transform: scale(1.02);
+        }
+
         &.selected {
             background-color: var(--clr-primary-active);
             border: 1px solid var(--clr-primary-border)
         }
+
         &.disabled {
             pointer-events: none;
-            cursor:not-allowed;
+            cursor: not-allowed;
             background-color: var(--clr-surface-1)
         }
 
-        &.selected > .label-wrapper > p {
+        &.selected>.label-wrapper>p {
             color: var(--clr-primary-1)
         }
-        & > p {
+
+        &>p {
             padding: 5px 10px 5px 10px;
             margin: 0rem;
             margin-right: .5rem;
-            background-color: rgba(255,0,0,0.1);
+            background-color: rgba(255, 0, 0, 0.1);
             border-radius: 5px;
         }
-
     }
 
     .modal-header {
         margin-bottom: 1rem;
+        display: flex;
+        gap: 24px;
 
-        & > p {
+        .img-wrapper,
+        .img-wrapper img {
+            height: 128px;
+            width: 128px;
+        }
+
+        &>p {
             font-size: 14px;
         }
     }
 
-    .remember-checkbox {
+    .checkbox-wrapper {
         display: flex;
         align-items: center;
         gap: 5px;
         padding: 5px;
 
-        &:hover, & > label:hover  {
+        &:hover,
+        &>label:hover {
             cursor: pointer;
         }
-     
     }
 }

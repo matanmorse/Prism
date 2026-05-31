@@ -1,4 +1,5 @@
 const hasConfiguredEmulator = async (fileExtension) => {
+    if (!fileExtension) return false;
     const supportedEmulators = await window.configService.getSupportedEmulators(fileExtension);
     if (supportedEmulators.length === 0) return false;
 

@@ -1,4 +1,4 @@
-import { StrictMode } from 'react'
+import { StrictMode, useState } from 'react'
 import { createRoot } from 'react-dom/client'
 import './styles/index.css'
 import App from './pages/Library.jsx'
@@ -11,25 +11,38 @@ import ErrorModal from './modals/ErrorModal.jsx'
 import Debug from './pages/Debug.jsx'
 import { Library } from 'lucide-react'
 import { LibraryProvider } from './contexts/LibraryContext.jsx'
-
+import { BigPictureProvider } from './contexts/BigPictureContext.jsx'
+import { init } from '@noriginmedia/norigin-spatial-navigation-core';
+import BigPictureEmulatorSettings from './pages/BigPictureEmulatorSettings.jsx'
+import BigPictureLibrarySettings from './pages/BigPictureLibrarySettings.jsx'
 
 const Router = import.meta.env.DEV ? BrowserRouter : HashRouter
+
+init({
+  debug: false,
+  visualDebug: false,
+});
+
 createRoot(document.getElementById('main')).render(
-<Router>
-  <EmulatorProvider>
-    <LibraryProvider>
-      <ModalProvider>
-          <StrictMode>
-              <Routes>
-                <Route path="/" element={<Layout />}>
-                  <Route index element={<App />} />
-                  <Route path='/debug' element={<Debug />} />
-                </Route>
-              </Routes>
-          </StrictMode>
-      </ModalProvider>
-    </LibraryProvider>
-  </EmulatorProvider>,
-</Router>
+<StrictMode>
+  <Router>
+  <BigPictureProvider>
+    <EmulatorProvider>
+      <LibraryProvider>
+        <ModalProvider>
+          <Routes>
+            <Route path="/" element={<Layout />}>
+              <Route index element={<App />} />
+              <Route path='/emulator_settings' element={<BigPictureEmulatorSettings />} />
+              <Route path='/library_settings' element={<BigPictureLibrarySettings />} />
+            </Route>
+          </Routes>
+        </ModalProvider>
+      </LibraryProvider>
+    </EmulatorProvider>,
+  </BigPictureProvider>
+  </Router>
+</StrictMode>
+
 
 )

@@ -3,7 +3,6 @@ import appIcon from '../../static/images/app-icon.png'
 import PrismIcon from './PrismIcon';
 const TitleBar = () => {
   const version = __APP_VERSION__
-  console.log(version)
     return (
     <div className="title-bar">
         <div className="title-box">

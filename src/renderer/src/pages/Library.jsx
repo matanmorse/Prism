@@ -1,28 +1,13 @@
-import { useState, useEffect, use } from 'react'
-import {Link} from 'react-router-dom'
-import {Clock, Star, Gamepad2} from 'lucide-react'
-import {Library as LibraryIcon} from 'lucide-react'
+import { useBigPicture } from "../contexts/BigPictureContext"
+import BigPictureLibrary from "../components/library/BigPictureLibrary";
+import DesktopLibrary from "../components/library/DesktopLibrary";
 import '../styles/Library.css'
-import GameCard from '../components/GameCard'
-import LibraryTopbar from '../components/library/LibraryTopbar'
-import { useLibrary } from '../contexts/LibraryContext'
 
 function App() {
-  const { games, fetchGames } = useLibrary();
-
-  useEffect(() => {fetchGames()}, [])
-
+  const {isBigPicture} = useBigPicture();
   return (
     <>
-      <div className="library">
-        <div className="bg-dots" />
-        <LibraryTopbar />
-        <div className="game-card-grid">
-          {games.map((game, index) => (
-            <GameCard key={index} game={game}/>
-          ))}
-        </div>
-      </div>
+      {isBigPicture ? <BigPictureLibrary /> : <DesktopLibrary />}
     </>
   )
 }
