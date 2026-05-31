@@ -43,6 +43,8 @@ const createWindow = () => {
             preload: path.join(__dirname, 'preload.js')
         }
     })
+    win.maximize(); // start maximized
+    win.focus()
 
     if (isDev()) win.loadURL('http://localhost:5173');
     else win.loadFile(path.join(__dirname, './renderer/dist/index.html'))

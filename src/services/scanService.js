@@ -12,6 +12,7 @@ const DEFAULT_SCAN_FOLDERS = [
   path.join(os.homedir(), 'Downloads'),
   path.join(os.homedir(), 'Documents'),
   path.join(os.homedir(), 'DOESNT EXIST'),
+  "C:\\Program Files",
   process.env.APPDATA,
 ].filter(Boolean);
 
@@ -71,9 +72,17 @@ const doEmulatorAutoScan = async(emulatorName) => {
 
 const scanForExe = async (filename, dir) => {
     if (!fs_sync.existsSync(dir)) return;
-    
+    console.log('scanning ' + dir)
     const scan = async (dir) => {
-        const entries = await fs.readdir(dir, { withFileTypes: true });
+        var entries;
+        try {
+            entries = await fs.readdir(dir, { withFileTypes: true });
+        }
+        catch (e) {
+            console.log(`[Scan Service] Error scanning ${dir}: ${e}`)
+            return undefined
+        }
+
         const result = await Promise.all(entries.map(async (entry) => {
             const fullPath = path.join(dir, entry.name);
             if (entry.isDirectory()) {

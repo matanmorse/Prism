@@ -113,6 +113,13 @@
                 "windows": "https://github.com/SourMesen/Mesen2/releases/download/2.1.1/Mesen_2.1.1_Windows.zip"
             },
             "finalExeName": "Mesen.exe"
+        },
+        {
+            "name": "mGBA",
+            "prettyName": "mGBA",
+            "fileFormats": ["gba"],
+            "systemNames":["GBA"],
+            "finalExeName":"mGBA.exe"
         }
     ],
     "fileFormats": {
@@ -149,7 +156,7 @@
         "fds": ["Ares", "Mesen"],
         "gb": ["Ares"],
         "nbc": ["Ares"],
-        "gba": ["Ares"],
+        "gba": ["Ares", "mGBA"],
         "smd": ["Ares"],
         "gen": ["Ares"],
         "a26": ["Ares"],
